@@ -91,7 +91,7 @@
 		47AD85991B6D558300B5A3C1 /* client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = client.h; sourceTree = "<group>"; };
 		47AD859C1B6D57A500B5A3C1 /* swiftbridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = swiftbridge.h; sourceTree = "<group>"; };
 		47AD859D1B6D5A4900B5A3C1 /* opengl_cb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opengl_cb.h; sourceTree = "<group>"; };
-		47AD85AF1B6D5F2900B5A3C1 /* XCGLogger.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XCGLogger.xcodeproj; path = ../../../stuff/XCGLogger/XCGLogger/Library/XCGLogger.xcodeproj; sourceTree = "<group>"; };
+		47AD85AF1B6D5F2900B5A3C1 /* XCGLogger.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XCGLogger.xcodeproj; path = ../XCGLogger/XCGLogger/Library/XCGLogger.xcodeproj; sourceTree = "<group>"; };
 		47AD85C71B6E095400B5A3C1 /* MpvClientOGLView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MpvClientOGLView.swift; path = mpx/MpvClientOGLView.swift; sourceTree = "<group>"; };
 		47AD85CD1B6EA6A800B5A3C1 /* swiftbridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = swiftbridge.m; sourceTree = "<group>"; };
 		47AD85CF1B768FC100B5A3C1 /* MpvWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MpvWindowController.swift; sourceTree = "<group>"; };
@@ -576,6 +576,7 @@
 				47AD857D1B6CF6F700B5A3C1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		47AD857E1B6CF6F700B5A3C1 /* Build configuration list for PBXNativeTarget "mpxTests" */ = {
 			isa = XCConfigurationList;
@@ -584,6 +585,7 @@
 				47AD85801B6CF6F700B5A3C1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
