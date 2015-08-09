@@ -8,12 +8,12 @@
 
 import Cocoa
 
-class ViewController: NSViewController {
+class MpvViewController: NSViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		// Do any additional setup after loading the view.
+		AppDelegate.getInstance().mpvView = self
 	}
 
 	override var representedObject: AnyObject? {
@@ -21,7 +21,6 @@ class ViewController: NSViewController {
 		// Update the view, if already loaded.
 		}
 	}
-
 
 }
 
