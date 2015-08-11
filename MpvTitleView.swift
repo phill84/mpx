@@ -7,9 +7,11 @@
 //
 
 import Cocoa
+import XCGLogger
 
 class MpvTitleView: NSView {
 
+	let logger = XCGLogger.defaultInstance()
 	let tbCornerLeft: NSImage
 	let tbCornerRight: NSImage
 	let tbMiddle: NSImage
@@ -20,8 +22,6 @@ class MpvTitleView: NSView {
 		tbMiddle = NSImage(named: "titlebar-middle")!
 
 		super.init(coder: coder)
-		
-		self.autoresizingMask = NSAutoresizingMaskOptions.ViewWidthSizable
 	}
 	
     override func drawRect(dirtyRect: NSRect) {
@@ -39,7 +39,6 @@ class MpvTitleView: NSView {
 		var middleRect = NSRect(origin: NSPoint(x: 0, y: 0), size: tbMiddle.size)
 		tbMiddle.drawInRect(NSRect(x: tbCornerLeft.size.width, y: 0, width: self.frame.size.width - tbCornerLeft.size.width - tbCornerRight.size.width, height: self.frame.size.height),
 			fromRect: middleRect, operation: NSCompositingOperation.CompositeCopy, fraction: 1.0)
-
     }
-    
+	
 }

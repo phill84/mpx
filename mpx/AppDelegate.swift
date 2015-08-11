@@ -15,8 +15,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	let logger = XCGLogger.defaultInstance()
 	let screenSize = NSScreen.mainScreen()?.frame
 	
-	var mpvWindow: MpvWindowController?
-	var mpvView: MpvViewController?
+	var mpvWindowController: MpvWindowController?
 	var openGLView: MpvClientOGLView?
 	var player: MpvPlayerController?
 	var menuBarHeight: CGFloat?
@@ -81,21 +80,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		let frame = NSRect(x: xOffset, y: yOffset, width: fw, height: fh)
 		
 		dispatch_async(dispatch_get_main_queue(), {
-			self.mpvWindow!.window?.setFrame(frame, display: true, animate: false)
-			
-			// resize all views
-			let contentView = self.mpvWindow?.window!.contentView as! NSView
-			contentView.setFrameSize(size)
-			for subview in contentView.subviews {
-				if subview is NSView {
-					let subNSView = subview as! NSView
-					subNSView.setFrameSize(size)
-					subNSView.setFrameOrigin(NSPoint(x: 0, y: 0))
-				}
-			}
+			self.mpvWindowController!.window?.setFrame(frame, display: true, animate: false)
 		})
-	}
-	
+	}	
 
 }
 

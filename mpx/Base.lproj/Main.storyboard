@@ -622,6 +622,7 @@
                         <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
                         <rect key="contentRect" x="196" y="240" width="640" height="480"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <contentBorderThickness minY="0.0" maxY="0.0"/>
                     </window>
                     <connections>
                         <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
@@ -639,18 +640,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="640" height="480"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <openGLView fixedFrame="YES" useAuxiliaryDepthBufferStencil="NO" useDoubleBufferingEnabled="YES" allowOffline="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c9Z-9j-OLs" customClass="MpvClientOGLView" customModule="mpx" customModuleProvider="target">
+                            <openGLView useAuxiliaryDepthBufferStencil="NO" useDoubleBufferingEnabled="YES" allowOffline="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c9Z-9j-OLs" customClass="MpvClientOGLView" customModule="mpx" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="640" height="480"/>
                             </openGLView>
-                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d6m-JK-Okv" userLabel="Control UI View">
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="d6m-JK-Okv" userLabel="Control UI View">
                                 <rect key="frame" x="0.0" y="0.0" width="640" height="480"/>
                                 <subviews>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MHE-ls-jQi" userLabel="Title View" customClass="MpvTitleView" customModule="mpx" customModuleProvider="target">
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="MHE-ls-jQi" userLabel="Title View" customClass="MpvTitleView" customModule="mpx" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="457" width="640" height="23"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="23" id="YNs-0u-rNY"/>
+                                        </constraints>
                                     </customView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="MHE-ls-jQi" secondAttribute="trailing" id="4ah-Ko-LI7"/>
+                                    <constraint firstItem="MHE-ls-jQi" firstAttribute="top" secondItem="d6m-JK-Okv" secondAttribute="top" id="faU-uM-lSd"/>
+                                    <constraint firstItem="MHE-ls-jQi" firstAttribute="leading" secondItem="d6m-JK-Okv" secondAttribute="leading" id="vaU-bm-ngr"/>
+                                </constraints>
                             </customView>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="c9Z-9j-OLs" firstAttribute="bottom" secondItem="d6m-JK-Okv" secondAttribute="bottom" id="61R-Ui-CuI"/>
+                            <constraint firstItem="c9Z-9j-OLs" firstAttribute="top" secondItem="d6m-JK-Okv" secondAttribute="top" id="B2I-Af-Ert"/>
+                            <constraint firstItem="c9Z-9j-OLs" firstAttribute="trailing" secondItem="d6m-JK-Okv" secondAttribute="trailing" id="Gy8-Sp-cqe"/>
+                            <constraint firstItem="d6m-JK-Okv" firstAttribute="leading" secondItem="c9Z-9j-OLs" secondAttribute="leading" id="TjX-Xw-Qea"/>
+                            <constraint firstItem="d6m-JK-Okv" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="WH8-zA-9yX"/>
+                            <constraint firstAttribute="trailing" secondItem="c9Z-9j-OLs" secondAttribute="trailing" id="ecJ-UI-Gf4"/>
+                            <constraint firstAttribute="bottom" secondItem="d6m-JK-Okv" secondAttribute="bottom" id="mDs-FD-tKX"/>
+                            <constraint firstItem="d6m-JK-Okv" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="v67-Bi-Tcg"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

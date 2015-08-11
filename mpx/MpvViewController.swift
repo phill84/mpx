@@ -7,13 +7,14 @@
 //
 
 import Cocoa
+import XCGLogger
 
 class MpvViewController: NSViewController {
+	
+	let logger = XCGLogger.defaultInstance()
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-
-		AppDelegate.getInstance().mpvView = self
 	}
 
 	override var representedObject: AnyObject? {
@@ -21,6 +22,6 @@ class MpvViewController: NSViewController {
 		// Update the view, if already loaded.
 		}
 	}
-
+	
 }
 

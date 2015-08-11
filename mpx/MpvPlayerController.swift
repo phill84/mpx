@@ -42,7 +42,7 @@ class MpvPlayerController: NSObject {
 		}
 		logger.debug("mpv openGL context created: \(openGLContext.debugDescription)")
 		
-		var openGLView = AppDelegate.getInstance().mpvView?.view.subviews.first as! MpvClientOGLView
+		var openGLView = AppDelegate.getInstance().openGLView!
 		
 		// register callbacks
 		openGLView.mpvOGLContext = openGLContext

@@ -13,7 +13,7 @@ class MpvWindowController: NSWindowController {
     override func windowDidLoad() {
         super.windowDidLoad()
     
-		AppDelegate.getInstance().mpvWindow = self
+		AppDelegate.getInstance().mpvWindowController = self
     }
 
 }
