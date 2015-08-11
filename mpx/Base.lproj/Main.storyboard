@@ -616,7 +616,7 @@
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController showSeguePresentationStyle="single" id="B8D-0N-5wS" customClass="MpvWindowController" customModule="mpx" customModuleProvider="target" sceneMemberID="viewController">
+                <windowController showSeguePresentationStyle="single" id="B8D-0N-5wS" customClass="MpxWindowController" customModule="mpx" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA" userLabel="Player Window">
                         <windowStyleMask key="styleMask" texturedBackground="YES"/>
                         <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
@@ -632,45 +632,25 @@
             </objects>
             <point key="canvasLocation" x="153" y="480"/>
         </scene>
-        <!--Mpv View Controller-->
+        <!--Video View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController showSeguePresentationStyle="single" id="XfG-lQ-9wD" customClass="MpvViewController" customModule="mpx" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl" userLabel="Player View">
+                <viewController showSeguePresentationStyle="single" id="XfG-lQ-9wD" userLabel="Video View Controller" customClass="MpxViewController" customModule="mpx" customModuleProvider="target" sceneMemberID="viewController">
+                    <customView key="view" id="pRb-EC-b1a" userLabel="Video View">
                         <rect key="frame" x="0.0" y="0.0" width="640" height="480"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
-                            <openGLView useAuxiliaryDepthBufferStencil="NO" useDoubleBufferingEnabled="YES" allowOffline="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c9Z-9j-OLs" customClass="MpvClientOGLView" customModule="mpx" customModuleProvider="target">
+                            <openGLView useAuxiliaryDepthBufferStencil="NO" useDoubleBufferingEnabled="YES" allowOffline="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zVf-Ce-XYD" userLabel="Mpv Client OGL View" customClass="MpvClientOGLView" customModule="mpx" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="640" height="480"/>
                             </openGLView>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="d6m-JK-Okv" userLabel="Control UI View">
-                                <rect key="frame" x="0.0" y="0.0" width="640" height="480"/>
-                                <subviews>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="MHE-ls-jQi" userLabel="Title View" customClass="MpvTitleView" customModule="mpx" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="457" width="640" height="23"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="23" id="YNs-0u-rNY"/>
-                                        </constraints>
-                                    </customView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="MHE-ls-jQi" secondAttribute="trailing" id="4ah-Ko-LI7"/>
-                                    <constraint firstItem="MHE-ls-jQi" firstAttribute="top" secondItem="d6m-JK-Okv" secondAttribute="top" id="faU-uM-lSd"/>
-                                    <constraint firstItem="MHE-ls-jQi" firstAttribute="leading" secondItem="d6m-JK-Okv" secondAttribute="leading" id="vaU-bm-ngr"/>
-                                </constraints>
-                            </customView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="c9Z-9j-OLs" firstAttribute="bottom" secondItem="d6m-JK-Okv" secondAttribute="bottom" id="61R-Ui-CuI"/>
-                            <constraint firstItem="c9Z-9j-OLs" firstAttribute="top" secondItem="d6m-JK-Okv" secondAttribute="top" id="B2I-Af-Ert"/>
-                            <constraint firstItem="c9Z-9j-OLs" firstAttribute="trailing" secondItem="d6m-JK-Okv" secondAttribute="trailing" id="Gy8-Sp-cqe"/>
-                            <constraint firstItem="d6m-JK-Okv" firstAttribute="leading" secondItem="c9Z-9j-OLs" secondAttribute="leading" id="TjX-Xw-Qea"/>
-                            <constraint firstItem="d6m-JK-Okv" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="WH8-zA-9yX"/>
-                            <constraint firstAttribute="trailing" secondItem="c9Z-9j-OLs" secondAttribute="trailing" id="ecJ-UI-Gf4"/>
-                            <constraint firstAttribute="bottom" secondItem="d6m-JK-Okv" secondAttribute="bottom" id="mDs-FD-tKX"/>
-                            <constraint firstItem="d6m-JK-Okv" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="v67-Bi-Tcg"/>
+                            <constraint firstItem="zVf-Ce-XYD" firstAttribute="leading" secondItem="pRb-EC-b1a" secondAttribute="leading" id="8jb-qD-frI"/>
+                            <constraint firstAttribute="bottom" secondItem="zVf-Ce-XYD" secondAttribute="bottom" id="WBo-Zu-dfC"/>
+                            <constraint firstItem="zVf-Ce-XYD" firstAttribute="top" secondItem="pRb-EC-b1a" secondAttribute="top" id="ZRX-lt-BPK"/>
+                            <constraint firstAttribute="trailing" secondItem="zVf-Ce-XYD" secondAttribute="trailing" id="hZP-ho-NyQ"/>
                         </constraints>
-                    </view>
+                    </customView>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

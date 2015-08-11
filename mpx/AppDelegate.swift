@@ -13,19 +13,15 @@ import XCGLogger
 class AppDelegate: NSObject, NSApplicationDelegate {
 
 	let logger = XCGLogger.defaultInstance()
-	let screenSize = NSScreen.mainScreen()?.frame
 	
-	var mpvWindowController: MpvWindowController?
+	var mpxWindowController: MpxWindowController?
 	var openGLView: MpvClientOGLView?
 	var player: MpvPlayerController?
-	var menuBarHeight: CGFloat?
+	
 
-	func applicationDidFinishLaunching(aNotification: NSNotification) {
-
-		// Initialize mpv player
+	func applicationDidFinishLaunching(aNotification: NSNotification) {        
+		// Initialize controllers
 		player = MpvPlayerController()
-		menuBarHeight = NSApplication.sharedApplication().mainMenu?.menuBarHeight
-		
 	}
 
 	func applicationWillTerminate(aNotification: NSNotification) {
@@ -52,37 +48,5 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			self.player?.openMediaFiles(openPanel.URLs.first! as! NSURL)
 		}
 	}
-	
-	
-	func resizeVideo(#width: Int, height: Int) {
-		let size = NSSize(width: width, height: height)
-		
-		// cap new size to main screen resolution
-		// while preserving the aspect ratio
-		var fh = CGFloat(size.height)
-		var fw = CGFloat(size.width)
-		var ar = fw / fh
-		
-		var maxHeight = screenSize!.height - menuBarHeight!
-		
-		if (fh > maxHeight) {
-			fh = maxHeight
-			fw = fh * ar
-		}
-		if (fw > screenSize!.width) {
-			fw = screenSize!.width
-			fh = fw / ar
-		}
-		// resize NSWindow with animation
-		let xOffset = (self.screenSize!.width - fw) / 2
-		let yOffset = (self.screenSize!.height - fh) / 2
-		
-		let frame = NSRect(x: xOffset, y: yOffset, width: fw, height: fh)
-		
-		dispatch_async(dispatch_get_main_queue(), {
-			self.mpvWindowController!.window?.setFrame(frame, display: true, animate: false)
-		})
-	}	
-
 }
 

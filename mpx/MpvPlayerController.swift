@@ -120,7 +120,7 @@ class MpvPlayerController: NSObject {
 			var h: Int = dict["h"] as! Int
 			
 			logger.debug("original resolution: \(w)x\(h)")
-			AppDelegate.getInstance().resizeVideo(width: w, height: h)
+			AppDelegate.getInstance().mpxWindowController?.resize(width: w, height: h)
 			
 		default:
 			let eventName = String.fromCString(mpv_event_name(event.event_id))!

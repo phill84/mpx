@@ -16,7 +16,11 @@ class MpvClientOGLView: NSOpenGLView {
 	let logger = XCGLogger.defaultInstance()
 	
 	var mpvOGLContext: UnsafeMutablePointer<Void>?
-
+    
+    override var mouseDownCanMoveWindow: Bool {
+        return true
+    }
+    
 	required init?(coder: NSCoder) {
 	    super.init(coder: coder)
 		logger.debug("init with coder: \(coder.debugDescription)")
@@ -33,10 +37,6 @@ class MpvClientOGLView: NSOpenGLView {
         super.drawRect(dirtyRect)
 		drawRect()
     }
-	
-	override var mouseDownCanMoveWindow: Bool {
-		return true
-	}
 	
 	func drawRect() {
 		if (mpvOGLContext == nil) {
