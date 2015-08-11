@@ -21,6 +21,12 @@ class MpvClientOGLView: NSOpenGLView {
         return true
     }
     
+    override var bounds: CGRect {
+        didSet {
+            self.updateTrackingAreas()
+        }
+    }
+    
 	required init?(coder: NSCoder) {
 	    super.init(coder: coder)
 		logger.debug("init with coder: \(coder.debugDescription)")
@@ -37,7 +43,18 @@ class MpvClientOGLView: NSOpenGLView {
         super.drawRect(dirtyRect)
 		drawRect()
     }
-	
+    
+    override func updateTrackingAreas() {
+        for area in self.trackingAreas {
+            if area is NSTrackingArea {
+                removeTrackingArea(area as! NSTrackingArea)
+            }
+        }
+        let area = NSTrackingArea(rect: self.bounds, options: NSTrackingAreaOptions.MouseEnteredAndExited | NSTrackingAreaOptions.ActiveAlways, owner: self, userInfo: nil)
+        logger.debug("add tracking area \(area.debugDescription)")
+        addTrackingArea(area)
+    }
+
 	func drawRect() {
 		if (mpvOGLContext == nil) {
 			fillBlack()

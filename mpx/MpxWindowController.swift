@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 phill84. All rights reserved.
 //
 
+import AppKit
 import Cocoa
 import XCGLogger
 
