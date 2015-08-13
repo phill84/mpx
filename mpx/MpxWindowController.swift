@@ -64,17 +64,22 @@ class MpxWindowController: NSWindowController {
         let frame = NSRect(x: xOffset, y: yOffset, width: w, height: h)
         
         dispatch_async(dispatch_get_main_queue(), {
+            CATransaction.begin()
+            CATransaction.setDisableActions(true)
             self.window?.setFrame(frame, display: true, animate: false)
             self.uiController!.window?.setFrame(frame, display: true, animate: false)
+            CATransaction.commit()
         })
     }
     
     override func mouseEntered(theEvent: NSEvent) {
-        logger.debug("mouse entered")
+        logger.debug("fade in ui view")
+        uiController?.fadeIn()
     }
 
     override func mouseExited(theEvent: NSEvent) {
-        logger.debug("mouse exited")
+        logger.debug("fade out ui view")
+        uiController?.fadeOut()
     }
 
 }

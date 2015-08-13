@@ -18,5 +18,7 @@ class MpxUIWindow: NSWindow {
         
         self.backgroundColor = NSColor.clearColor()
         self.opaque = false
+        
+        self.ignoresMouseEvents = true
     }
 }

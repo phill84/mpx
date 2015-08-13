@@ -7,8 +7,11 @@
 //
 
 import Cocoa
+import XCGLogger
 
 class MpxUIView: NSView {
+
+    let logger = XCGLogger.defaultInstance()
     
     override func drawRect(dirtyRect: NSRect) {
         super.drawRect(dirtyRect)

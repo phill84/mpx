@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 phill84. All rights reserved.
 //
 
-import AppKit
 import Cocoa
 import OpenGL.GL
 import XCGLogger
@@ -54,7 +53,7 @@ class MpvClientOGLView: NSOpenGLView {
         logger.debug("add tracking area \(area.debugDescription)")
         addTrackingArea(area)
     }
-
+        
 	func drawRect() {
 		if (mpvOGLContext == nil) {
 			fillBlack()
