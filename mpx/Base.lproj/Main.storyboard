@@ -616,7 +616,7 @@
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController showSeguePresentationStyle="single" id="B8D-0N-5wS" customClass="MpxWindowController" customModule="mpx" customModuleProvider="target" sceneMemberID="viewController">
+                <windowController showSeguePresentationStyle="single" id="B8D-0N-5wS" customClass="PlayerWindowController" customModule="mpx" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA" userLabel="Player Window">
                         <windowStyleMask key="styleMask" texturedBackground="YES"/>
                         <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
@@ -632,23 +632,48 @@
             </objects>
             <point key="canvasLocation" x="153" y="480"/>
         </scene>
-        <!--Video View Controller-->
+        <!--Player View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController showSeguePresentationStyle="single" id="XfG-lQ-9wD" userLabel="Video View Controller" customClass="MpxViewController" customModule="mpx" customModuleProvider="target" sceneMemberID="viewController">
-                    <customView key="view" id="pRb-EC-b1a" userLabel="Video View">
+                <viewController showSeguePresentationStyle="single" id="XfG-lQ-9wD" userLabel="Player View Controller" customClass="PlayerViewController" customModule="mpx" customModuleProvider="target" sceneMemberID="viewController">
+                    <customView key="view" wantsLayer="YES" id="pRb-EC-b1a" userLabel="Player View">
                         <rect key="frame" x="0.0" y="0.0" width="640" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <openGLView useAuxiliaryDepthBufferStencil="NO" useDoubleBufferingEnabled="YES" allowOffline="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zVf-Ce-XYD" userLabel="Mpv Client OGL View" customClass="MpvClientOGLView" customModule="mpx" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="640" height="480"/>
                             </openGLView>
+                            <view translatesAutoresizingMaskIntoConstraints="NO" id="LJC-5Z-ZMP" userLabel="UI View" customClass="ControlUIView" customModule="mpx" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="640" height="480"/>
+                                <subviews>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="ca3-ZS-mAk" userLabel="Title View" customClass="TitleView" customModule="mpx" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="458" width="640" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="22" id="gjX-F1-6VC"/>
+                                        </constraints>
+                                        <shadow key="shadow" blurRadius="2">
+                                            <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </shadow>
+                                        <animations/>
+                                    </customView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="ca3-ZS-mAk" firstAttribute="leading" secondItem="LJC-5Z-ZMP" secondAttribute="leading" id="7sD-eu-aAW"/>
+                                    <constraint firstItem="ca3-ZS-mAk" firstAttribute="top" secondItem="LJC-5Z-ZMP" secondAttribute="top" id="KCs-Fe-7yj"/>
+                                    <constraint firstAttribute="trailing" secondItem="ca3-ZS-mAk" secondAttribute="trailing" id="Z5L-4o-gWR"/>
+                                </constraints>
+                                <animations/>
+                            </view>
                         </subviews>
                         <constraints>
                             <constraint firstItem="zVf-Ce-XYD" firstAttribute="leading" secondItem="pRb-EC-b1a" secondAttribute="leading" id="8jb-qD-frI"/>
+                            <constraint firstAttribute="trailing" secondItem="LJC-5Z-ZMP" secondAttribute="trailing" id="9zh-lq-Hhc"/>
                             <constraint firstAttribute="bottom" secondItem="zVf-Ce-XYD" secondAttribute="bottom" id="WBo-Zu-dfC"/>
                             <constraint firstItem="zVf-Ce-XYD" firstAttribute="top" secondItem="pRb-EC-b1a" secondAttribute="top" id="ZRX-lt-BPK"/>
+                            <constraint firstAttribute="bottom" secondItem="LJC-5Z-ZMP" secondAttribute="bottom" id="dQR-Gz-ont"/>
                             <constraint firstAttribute="trailing" secondItem="zVf-Ce-XYD" secondAttribute="trailing" id="hZP-ho-NyQ"/>
+                            <constraint firstItem="LJC-5Z-ZMP" firstAttribute="top" secondItem="pRb-EC-b1a" secondAttribute="top" id="il8-Ok-UdX"/>
+                            <constraint firstItem="LJC-5Z-ZMP" firstAttribute="leading" secondItem="pRb-EC-b1a" secondAttribute="leading" id="tJw-eH-Cr6"/>
                         </constraints>
                     </customView>
                 </viewController>

@@ -1,5 +1,5 @@
 //
-//  MpxWindowController.swift
+//  PlayerWindowController.swift
 //  mpx
 //
 //  Created by Jiening Wen on 08/08/15.
@@ -10,26 +10,30 @@ import AppKit
 import Cocoa
 import XCGLogger
 
-class MpxWindowController: NSWindowController {
+class PlayerWindowController: NSWindowController {
     
     let logger = XCGLogger.defaultInstance()
     let screenSize = NSScreen.mainScreen()?.frame
     let menuBarHeight = NSApplication.sharedApplication().mainMenu?.menuBarHeight
 
-    var uiController: MpxUIWindowController?
+    var uiView: ControlUIView?
+    var titleView: TitleView?
     var currentSize: NSRect?
     
     override func windowDidLoad() {
         super.windowDidLoad()
     
-		AppDelegate.getInstance().mpxWindowController = self
+		AppDelegate.getInstance().playerWindowController = self
         
         // get default size
         currentSize = self.window?.frame
         
-        // add UI window as a child window above video window
-        uiController = MpxUIWindowController(windowNibName: "MpxUIWindow")
-        self.window?.addChildWindow(uiController!.window!, ordered: NSWindowOrderingMode.Above)
+        // determine UI views
+        for obj in window!.contentView.subviews {
+            if obj is ControlUIView {
+                self.uiView = obj as? ControlUIView
+            }
+        }
     }
     
     func resize(#width: Int, height: Int) {
@@ -66,20 +70,19 @@ class MpxWindowController: NSWindowController {
         dispatch_async(dispatch_get_main_queue(), {
             CATransaction.begin()
             CATransaction.setDisableActions(true)
-            self.window?.setFrame(frame, display: true, animate: false)
-            self.uiController!.window?.setFrame(frame, display: true, animate: false)
+            self.window?.setFrame(frame, display: true, animate: true)
             CATransaction.commit()
         })
     }
     
     override func mouseEntered(theEvent: NSEvent) {
-        logger.debug("fade in ui view")
-        uiController?.fadeIn()
+//        logger.debug("fade in ui view")
+        uiView?.animator().alphaValue = 1
     }
 
     override func mouseExited(theEvent: NSEvent) {
-        logger.debug("fade out ui view")
-        uiController?.fadeOut()
+//        logger.debug("fade out ui view")
+        uiView?.animator().alphaValue = 0
     }
 
 }

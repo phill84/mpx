@@ -1,5 +1,5 @@
 //
-//  MpxUIView.swift
+//  ControlUIView.swift
 //  mpx
 //
 //  Created by Jiening Wen on 11/08/15.
@@ -9,9 +9,14 @@
 import Cocoa
 import XCGLogger
 
-class MpxUIView: NSView {
+class ControlUIView: NSView {
 
     let logger = XCGLogger.defaultInstance()
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        AppDelegate.getInstance().playerWindowController?.uiView = self
+    }
     
     override func drawRect(dirtyRect: NSRect) {
         super.drawRect(dirtyRect)

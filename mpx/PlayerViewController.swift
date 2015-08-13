@@ -1,5 +1,5 @@
 //
-//  MpxViewController.swift
+//  PlayerViewController.swift
 //  mpx
 //
 //  Created by Jiening Wen on 01/08/15.
@@ -9,7 +9,7 @@
 import Cocoa
 import XCGLogger
 
-class MpxViewController: NSViewController {
+class PlayerViewController: NSViewController {
 	
 	let logger = XCGLogger.defaultInstance()
 

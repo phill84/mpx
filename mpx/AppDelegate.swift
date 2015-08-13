@@ -14,14 +14,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 	let logger = XCGLogger.defaultInstance()
 	
-	var mpxWindowController: MpxWindowController?
+	var playerWindowController: PlayerWindowController?
 	var openGLView: MpvClientOGLView?
-	var player: MpvPlayerController?
+	var mpv: MpvController?
 	
 
 	func applicationDidFinishLaunching(aNotification: NSNotification) {        
 		// Initialize controllers
-		player = MpvPlayerController()
+		mpv = MpvController()
 	}
 
 	func applicationWillTerminate(aNotification: NSNotification) {
@@ -45,7 +45,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		
 		if (openPanel.runModal() == NSFileHandlingPanelOKButton) {
 			self.logger.debug(openPanel.URLs.debugDescription)
-			self.player?.openMediaFiles(openPanel.URLs.first! as! NSURL)
+			self.mpv?.openMediaFiles(openPanel.URLs.first! as! NSURL)
 		}
 	}
 }

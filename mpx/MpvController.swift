@@ -1,5 +1,5 @@
 //
-//  MpvPlayerController.swift
+//  MpvController.swift
 //  mpx
 //
 //  Created by Jiening Wen on 01/08/15.
@@ -10,7 +10,7 @@ import Cocoa
 import Foundation
 import XCGLogger
 
-class MpvPlayerController: NSObject {
+class MpvController: NSObject {
 	
 	let logger = XCGLogger.defaultInstance()
 	
@@ -58,8 +58,8 @@ class MpvPlayerController: NSObject {
 	
 	func getWakeupCallback() -> CFunctionPointer<(UnsafeMutablePointer<Void> -> Void)> {
 		let block : @objc_block (UnsafeMutablePointer<Void>) -> Void = { (context) in
-			let playerController = unsafeBitCast(context, MpvPlayerController.self)
-			playerController.readEvents()
+			let mpvController = unsafeBitCast(context, MpvController.self)
+			mpvController.readEvents()
 		}
 		let imp : COpaquePointer = imp_implementationWithBlock(unsafeBitCast(block, AnyObject.self))
 		let callback = CFunctionPointer<(UnsafeMutablePointer<Void> -> Void)>(imp)
@@ -120,7 +120,7 @@ class MpvPlayerController: NSObject {
 			var h: Int = dict["h"] as! Int
 			
 			logger.debug("original resolution: \(w)x\(h)")
-			AppDelegate.getInstance().mpxWindowController?.resize(width: w, height: h)
+			AppDelegate.getInstance().playerWindowController?.resize(width: w, height: h)
 			
 		default:
 			let eventName = String.fromCString(mpv_event_name(event.event_id))!

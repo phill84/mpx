@@ -24,7 +24,7 @@ mpv_opengl_cb_get_proc_address_fn get_proc_address_fn()
 
 static void glupdate(void *ctx)
 {
-	MpvPlayerController *player = (__bridge MpvPlayerController *)ctx;
+	MpvController *player = (__bridge MpvController *)ctx;
 	// I'm still not sure what the best way to handle this is, but this works.
 	dispatch_async(dispatch_get_main_queue(), ^{
 		[player drawRect];
