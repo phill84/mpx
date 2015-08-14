@@ -13,8 +13,6 @@ import XCGLogger
 class PlayerWindowController: NSWindowController {
     
     let logger = XCGLogger.defaultInstance()
-    let screenSize = NSScreen.mainScreen()?.frame
-    let menuBarHeight = NSApplication.sharedApplication().mainMenu?.menuBarHeight
 
     var uiView: ControlUIView?
     var titleView: TitleView?
@@ -34,9 +32,23 @@ class PlayerWindowController: NSWindowController {
                 self.uiView = obj as? ControlUIView
             }
         }
+        
+        center()
     }
     
+    override func mouseEntered(theEvent: NSEvent) {
+        if AppDelegate.getInstance().active {
+            uiView?.animator().alphaValue = 1
+        }
+    }
+    
+    override func mouseExited(theEvent: NSEvent) {
+        uiView?.animator().alphaValue = 0
+    }
+
+    
     func resize(#width: Int, height: Int) {
+        let visibleFrame = NSScreen.mainScreen()?.visibleFrame
         let size = NSSize(width: width, height: height)
         
         // cap new size to main screen resolution
@@ -45,14 +57,14 @@ class PlayerWindowController: NSWindowController {
         var w = CGFloat(size.width)
         var ar = w / h
         
-        var maxHeight = screenSize!.height - menuBarHeight!
+        var maxHeight = visibleFrame!.height// - menuBarHeight!
         
         if (h > maxHeight) {
             h = maxHeight
             w = h * ar
         }
-        if (w > screenSize!.width) {
-            w = screenSize!.width
+        if (w > visibleFrame!.width) {
+            w = visibleFrame!.width
             h = w / ar
         }
         
@@ -62,27 +74,32 @@ class PlayerWindowController: NSWindowController {
         }
         
         // resize NSWindow with animation
-        let xOffset = (self.screenSize!.width - w) / 2
-        let yOffset = (self.screenSize!.height - h) / 2
+        let xOffset = (visibleFrame!.width - w) / 2
+        let yOffset = (visibleFrame!.height - h) / 2 + visibleFrame!.origin.y
         
         let frame = NSRect(x: xOffset, y: yOffset, width: w, height: h)
         
+        
         dispatch_async(dispatch_get_main_queue(), {
-            CATransaction.begin()
-            CATransaction.setDisableActions(true)
             self.window?.setFrame(frame, display: true, animate: true)
-            CATransaction.commit()
         })
     }
     
-    override func mouseEntered(theEvent: NSEvent) {
-//        logger.debug("fade in ui view")
-        uiView?.animator().alphaValue = 1
+    func center() {
+        let visibleFrame = NSScreen.mainScreen()?.visibleFrame
+        let x = (visibleFrame!.width - self.window!.frame.width) / 2
+        let y = (visibleFrame!.height - self.window!.frame.height) / 2 + visibleFrame!.origin.y
+        self.window!.setFrameOrigin(NSPoint(x: x, y: y))
     }
-
-    override func mouseExited(theEvent: NSEvent) {
-//        logger.debug("fade out ui view")
-        uiView?.animator().alphaValue = 0
+    
+    func alertAndExit(error: String) {
+        let alert = NSAlert()
+        alert.addButtonWithTitle("OK")
+        alert.messageText = "Failed to initialize mpv"
+        alert.informativeText = error
+        alert.alertStyle = NSAlertStyle.CriticalAlertStyle
+        if alert.runModal() == NSAlertFirstButtonReturn {
+            NSApplication.sharedApplication().terminate(alert)
+        }
     }
-
 }

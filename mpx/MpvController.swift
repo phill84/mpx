@@ -23,8 +23,9 @@ class MpvController: NSObject {
 		// initialize mpv
 		context = mpv_create()
 		if (context == nil) {
-			logger.severe("failed to create mpv context")
-			return
+            let error = "failed to create mpv context"
+			logger.severe(error)
+			AppDelegate.getInstance().playerWindowController?.alertAndExit(error)
 		}
 		logger.debug("mpv context created: \(self.context!.debugDescription)")
 		
@@ -33,22 +34,29 @@ class MpvController: NSObject {
 		
 		mpvQueue = dispatch_queue_create("mpv", DISPATCH_QUEUE_SERIAL)
 		
-		// set up opengl
+        // set default options
+        checkError(mpv_set_option_string(context!, "audio-client-name", "mpx"))
+        checkError(mpv_set_option_string(context!, "hwdec", "auto"))
+        checkError(mpv_set_option_string(context!, "hwdec-codecs", "all"))
 		checkError(mpv_set_option_string(context!, "vo", "opengl-cb"))
-		var openGLContext = mpv_get_sub_api(context!, MPV_SUB_API_OPENGL_CB)
+
+		let openGLContext = mpv_get_sub_api(context!, MPV_SUB_API_OPENGL_CB)
 		if (openGLContext == nil) {
-			logger.severe("libmpv does not have the opengl-cb sub-API.")
-			return
+            let error = "libmpv does not have the opengl-cb sub-API"
+			logger.severe(error)
+			AppDelegate.getInstance().playerWindowController?.alertAndExit(error)
 		}
 		logger.debug("mpv openGL context created: \(openGLContext.debugDescription)")
 		
-		var openGLView = AppDelegate.getInstance().openGLView!
+		let openGLView = AppDelegate.getInstance().openGLView!
 		
 		// register callbacks
 		openGLView.mpvOGLContext = openGLContext
- 		var r = mpv_opengl_cb_init_gl(COpaquePointer(openGLContext), nil, get_proc_address_fn(), nil)
+ 		let r = mpv_opengl_cb_init_gl(COpaquePointer(openGLContext), nil, get_proc_address_fn(), nil)
 		if (r < 0) {
-			logger.severe("gl init has failed.")
+            let error = "init_gl has failed"
+			logger.severe(error)
+            AppDelegate.getInstance().playerWindowController?.alertAndExit(error)
 		}
 		mpv_opengl_cb_set_update_callback(COpaquePointer(openGLContext), get_update_fn(), unsafeBitCast(self, UnsafeMutablePointer<Void>.self))
 		
@@ -68,7 +76,9 @@ class MpvController: NSObject {
 	
 	func checkError(status: Int32) {
 		if (status < 0) {
-			logger.error("mpv API error: \(String.fromCString(mpv_error_string(status))!)")
+            let error = String.fromCString(mpv_error_string(status))!
+			logger.error("mpv API error: \(error)")
+            AppDelegate.getInstance().playerWindowController?.alertAndExit(error)
 		}
 	}
 	
@@ -79,14 +89,11 @@ class MpvController: NSObject {
 	}
 	
 	func readEvents() {
-		logger.debug("reading events")
-		
 		dispatch_async(mpvQueue!, {
 			while (self.context != nil) {
 				let event = mpv_wait_event(self.context!, 0).memory
 
 				let event_id = event.event_id.value
-				self.logger.debug("event_id: \(event_id)")
 				if (event_id == MPV_EVENT_NONE.value) {
 					break
 				}
@@ -101,11 +108,14 @@ class MpvController: NSObject {
 			logger.debug("mpv shutdown")
 			
 		case MPV_EVENT_LOG_MESSAGE.value:
-			let msg = unsafeBitCast(event.data, mpv_event_log_message.self)
+			let msg = UnsafeMutablePointer<mpv_event_log_message>(event.data).memory
 			let prefix = String.fromCString(msg.prefix)!
 			let level = String.fromCString(msg.level)!
-			let text = String.fromCString(msg.text)!
-			logger.debug("[\(prefix)] \(level): \(text)")
+			var text = String.fromCString(msg.text)!
+            text = text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+            if !text.isEmpty {
+                logger.debug("[\(prefix)] \(level): \(text)")
+            }
 			
 		case MPV_EVENT_FILE_LOADED.value:
 			var videoParams: mpv_node?

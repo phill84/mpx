@@ -14,19 +14,29 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 	let logger = XCGLogger.defaultInstance()
 	
+    var active = false;
+    
 	var playerWindowController: PlayerWindowController?
 	var openGLView: MpvClientOGLView?
 	var mpv: MpvController?
-	
 
-	func applicationDidFinishLaunching(aNotification: NSNotification) {        
+	func applicationDidFinishLaunching(notification: NSNotification) {
 		// Initialize controllers
 		mpv = MpvController()
+        
 	}
 
-	func applicationWillTerminate(aNotification: NSNotification) {
+	func applicationWillTerminate(notification: NSNotification) {
 		// Insert code here to tear down your application
 	}
+    
+    func applicationDidBecomeActive(notification: NSNotification) {
+        active = true
+    }
+    
+    func applicationDidResignActive(notification: NSNotification) {
+        active = false
+    }
 
 	static func getInstance() -> AppDelegate {
 		return NSApplication.sharedApplication().delegate as! AppDelegate
