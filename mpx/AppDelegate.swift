@@ -17,7 +17,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var active = false;
     
 	var playerWindowController: PlayerWindowController?
-	var openGLView: MpvClientOGLView?
 	var mpv: MpvController?
 
 	func applicationDidFinishLaunching(notification: NSNotification) {

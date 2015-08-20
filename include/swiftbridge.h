@@ -14,8 +14,6 @@
 #import "opengl_cb.h"
 
 // helper functions
-mpv_opengl_cb_get_proc_address_fn get_proc_address_fn();
-mpv_opengl_cb_update_fn get_update_fn();
 NSDictionary* get_mpv_node_list_as_dict(mpv_node node);
 
 #endif

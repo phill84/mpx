@@ -20,6 +20,8 @@ class PlayerWindowController: NSWindowController {
     
     override func windowDidLoad() {
         super.windowDidLoad()
+        
+        self.window?.backgroundColor = NSColor.blackColor()
     
 		AppDelegate.getInstance().playerWindowController = self
         

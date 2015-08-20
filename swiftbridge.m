@@ -9,33 +9,6 @@
 #import <mpx-Swift.h>
 #import "swiftbridge.h"
 
-static void *get_proc_address(void *ctx, const char *name)
-{
-	CFStringRef symbolName = CFStringCreateWithCString(kCFAllocatorDefault, name, kCFStringEncodingASCII);
-	void *addr = CFBundleGetFunctionPointerForName(CFBundleGetBundleWithIdentifier(CFSTR("com.apple.opengl")), symbolName);
-	CFRelease(symbolName);
-	return addr;
-}
-
-mpv_opengl_cb_get_proc_address_fn get_proc_address_fn()
-{
-	return get_proc_address;
-}
-
-static void glupdate(void *ctx)
-{
-	MpvController *player = (__bridge MpvController *)ctx;
-	// I'm still not sure what the best way to handle this is, but this works.
-	dispatch_async(dispatch_get_main_queue(), ^{
-		[player drawRect];
-	});
-}
-
-mpv_opengl_cb_update_fn get_update_fn()
-{
-	return glupdate;
-}
-
 NSDictionary* get_mpv_node_list_as_dict(mpv_node node) {
 	if (node.format != MPV_FORMAT_NODE_ARRAY && node.format != MPV_FORMAT_NODE_MAP) {
 		return nil;

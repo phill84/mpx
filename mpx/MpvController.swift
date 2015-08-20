@@ -35,32 +35,13 @@ class MpvController: NSObject {
 		mpvQueue = dispatch_queue_create("mpv", DISPATCH_QUEUE_SERIAL)
 		
         // set default options
+        var playerView: AnyObject? = AppDelegate.getInstance().playerWindowController?.window?.contentView
+        checkError(mpv_set_option(context!, "wid", MPV_FORMAT_INT64, &playerView))
         checkError(mpv_set_option_string(context!, "audio-client-name", "mpx"))
         checkError(mpv_set_option_string(context!, "hwdec", "auto"))
         checkError(mpv_set_option_string(context!, "hwdec-codecs", "all"))
-		checkError(mpv_set_option_string(context!, "vo", "opengl-cb"))
-
-		let openGLContext = mpv_get_sub_api(context!, MPV_SUB_API_OPENGL_CB)
-		if (openGLContext == nil) {
-            let error = "libmpv does not have the opengl-cb sub-API"
-			logger.severe(error)
-			AppDelegate.getInstance().playerWindowController?.alertAndExit(error)
-		}
-		logger.debug("mpv openGL context created: \(openGLContext.debugDescription)")
-		
-		let openGLView = AppDelegate.getInstance().openGLView!
 		
 		// register callbacks
-		openGLView.mpvOGLContext = openGLContext
- 		let r = mpv_opengl_cb_init_gl(COpaquePointer(openGLContext), nil, get_proc_address_fn(), nil)
-		if (r < 0) {
-            let error = "init_gl has failed"
-			logger.severe(error)
-            AppDelegate.getInstance().playerWindowController?.alertAndExit(error)
-		}
-		mpv_opengl_cb_set_update_callback(COpaquePointer(openGLContext), get_update_fn(), unsafeBitCast(self, UnsafeMutablePointer<Void>.self))
-		
-		
 		mpv_set_wakeup_callback(context!, getWakeupCallback(), unsafeBitCast(self, UnsafeMutablePointer<Void>.self));
 	}
 	
@@ -79,12 +60,6 @@ class MpvController: NSObject {
             let error = String.fromCString(mpv_error_string(status))!
 			logger.error("mpv API error: \(error)")
             AppDelegate.getInstance().playerWindowController?.alertAndExit(error)
-		}
-	}
-	
-	func drawRect() {
-		if (AppDelegate.getInstance().openGLView != nil) {
-			AppDelegate.getInstance().openGLView!.drawRect()
 		}
 	}
 	
@@ -132,6 +107,15 @@ class MpvController: NSObject {
 			logger.debug("original resolution: \(w)x\(h)")
 			AppDelegate.getInstance().playerWindowController?.resize(width: w, height: h)
 			
+        case MPV_EVENT_PLAYBACK_RESTART.value:
+            logger.debug("playback restart")
+//            let controlUIView = AppDelegate.getInstance().playerWindowController?.window?.contentView.subviews[0] as! ControlUIView
+//            let mpvEventsView = AppDelegate.getInstance().playerWindowController?.window?.contentView.subviews[1] as! NSView
+//            dispatch_async(dispatch_get_main_queue(), {
+//                controlUIView.removeFromSuperviewWithoutNeedingDisplay()
+//                AppDelegate.getInstance().playerWindowController?.window?.contentView.addSubview(controlUIView, positioned: NSWindowOrderingMode.Above, relativeTo: mpvEventsView)
+//            })
+
 		default:
 			let eventName = String.fromCString(mpv_event_name(event.event_id))!
 			logger.debug("event name: \(eventName)")
