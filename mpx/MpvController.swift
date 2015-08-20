@@ -35,12 +35,13 @@ class MpvController: NSObject {
 		mpvQueue = dispatch_queue_create("mpv", DISPATCH_QUEUE_SERIAL)
 		
         // set default options
-        var playerView: AnyObject? = AppDelegate.getInstance().playerWindowController?.window?.contentView
-        checkError(mpv_set_option(context!, "wid", MPV_FORMAT_INT64, &playerView))
+        var videoView: AnyObject? = AppDelegate.getInstance().playerWindowController?.window?.contentView.subviews[0]
+        checkError(mpv_set_option(context!, "wid", MPV_FORMAT_INT64, &videoView))
         checkError(mpv_set_option_string(context!, "audio-client-name", "mpx"))
         checkError(mpv_set_option_string(context!, "hwdec", "auto"))
         checkError(mpv_set_option_string(context!, "hwdec-codecs", "all"))
-		
+
+        
 		// register callbacks
 		mpv_set_wakeup_callback(context!, getWakeupCallback(), unsafeBitCast(self, UnsafeMutablePointer<Void>.self));
 	}
@@ -91,6 +92,7 @@ class MpvController: NSObject {
             if !text.isEmpty {
                 logger.debug("[\(prefix)] \(level): \(text)")
             }
+        
 			
 		case MPV_EVENT_FILE_LOADED.value:
 			var videoParams: mpv_node?
@@ -106,19 +108,16 @@ class MpvController: NSObject {
 			
 			logger.debug("original resolution: \(w)x\(h)")
 			AppDelegate.getInstance().playerWindowController?.resize(width: w, height: h)
-			
+
         case MPV_EVENT_PLAYBACK_RESTART.value:
             logger.debug("playback restart")
-//            let controlUIView = AppDelegate.getInstance().playerWindowController?.window?.contentView.subviews[0] as! ControlUIView
-//            let mpvEventsView = AppDelegate.getInstance().playerWindowController?.window?.contentView.subviews[1] as! NSView
-//            dispatch_async(dispatch_get_main_queue(), {
-//                controlUIView.removeFromSuperviewWithoutNeedingDisplay()
-//                AppDelegate.getInstance().playerWindowController?.window?.contentView.addSubview(controlUIView, positioned: NSWindowOrderingMode.Above, relativeTo: mpvEventsView)
-//            })
 
 		default:
 			let eventName = String.fromCString(mpv_event_name(event.event_id))!
 			logger.debug("event name: \(eventName)")
+            if event.data != nil {
+                logger.debug("event data: \(event.data)")
+            }
 			
 		}
 	}

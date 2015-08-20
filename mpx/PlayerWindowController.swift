@@ -14,8 +14,6 @@ class PlayerWindowController: NSWindowController {
     
     let logger = XCGLogger.defaultInstance()
 
-    var uiView: ControlUIView?
-    var titleView: TitleView?
     var currentSize: NSRect?
     
     override func windowDidLoad() {
@@ -28,26 +26,8 @@ class PlayerWindowController: NSWindowController {
         // get default size
         currentSize = self.window?.frame
         
-        // determine UI views
-        for obj in window!.contentView.subviews {
-            if obj is ControlUIView {
-                self.uiView = obj as? ControlUIView
-            }
-        }
-        
         center()
     }
-    
-    override func mouseEntered(theEvent: NSEvent) {
-        if AppDelegate.getInstance().active {
-            uiView?.animator().alphaValue = 1
-        }
-    }
-    
-    override func mouseExited(theEvent: NSEvent) {
-        uiView?.animator().alphaValue = 0
-    }
-
     
     func resize(#width: Int, height: Int) {
         let visibleFrame = NSScreen.mainScreen()?.visibleFrame

@@ -21,7 +21,6 @@ class ControlUIView: NSView {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        AppDelegate.getInstance().playerWindowController?.uiView = self
     }
     
     override func drawRect(dirtyRect: NSRect) {
@@ -41,6 +40,15 @@ class ControlUIView: NSView {
         
         super.updateTrackingAreas()
     }
-
+    
+    override func mouseEntered(theEvent: NSEvent) {
+        if AppDelegate.getInstance().active {
+            animator().alphaValue = 1
+        }
+    }
+    
+    override func mouseExited(theEvent: NSEvent) {
+        animator().alphaValue = 0
+    }
     
 }

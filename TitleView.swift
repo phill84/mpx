@@ -16,7 +16,6 @@ class TitleView: NSView {
 	
 	required init?(coder: NSCoder) {
 		super.init(coder: coder)
-        AppDelegate.getInstance().playerWindowController?.titleView = self
 	}
 	
     override func drawRect(dirtyRect: NSRect) {

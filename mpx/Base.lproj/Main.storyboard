@@ -636,14 +636,17 @@
         <scene sceneID="hIz-AP-VOD">
             <objects>
                 <viewController showSeguePresentationStyle="single" id="XfG-lQ-9wD" userLabel="Player View Controller" customClass="PlayerViewController" customModule="mpx" customModuleProvider="target" sceneMemberID="viewController">
-                    <customView key="view" wantsLayer="YES" id="pRb-EC-b1a" userLabel="Player View" customClass="PlayerView" customModule="mpx" customModuleProvider="target">
+                    <customView key="view" wantsLayer="YES" id="pRb-EC-b1a" userLabel="Player View">
                         <rect key="frame" x="0.0" y="0.0" width="640" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="M00-FX-bEb" userLabel="Video View">
+                                <rect key="frame" x="0.0" y="0.0" width="640" height="480"/>
+                            </customView>
                             <view translatesAutoresizingMaskIntoConstraints="NO" id="LJC-5Z-ZMP" userLabel="UI View" customClass="ControlUIView" customModule="mpx" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="640" height="480"/>
                                 <subviews>
-                                    <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ca3-ZS-mAk" userLabel="Title View" customClass="TitleView" customModule="mpx" customModuleProvider="target">
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="ca3-ZS-mAk" userLabel="Title View" customClass="TitleView" customModule="mpx" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="458" width="640" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="gjX-F1-6VC"/>
@@ -664,9 +667,13 @@
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="LJC-5Z-ZMP" secondAttribute="trailing" id="9zh-lq-Hhc"/>
+                            <constraint firstAttribute="bottom" secondItem="M00-FX-bEb" secondAttribute="bottom" id="H8C-1u-wQD"/>
+                            <constraint firstItem="M00-FX-bEb" firstAttribute="leading" secondItem="pRb-EC-b1a" secondAttribute="leading" id="TR0-zW-HR1"/>
                             <constraint firstAttribute="bottom" secondItem="LJC-5Z-ZMP" secondAttribute="bottom" id="dQR-Gz-ont"/>
                             <constraint firstItem="LJC-5Z-ZMP" firstAttribute="top" secondItem="pRb-EC-b1a" secondAttribute="top" id="il8-Ok-UdX"/>
+                            <constraint firstAttribute="trailing" secondItem="M00-FX-bEb" secondAttribute="trailing" id="jxG-kh-2YX"/>
                             <constraint firstItem="LJC-5Z-ZMP" firstAttribute="leading" secondItem="pRb-EC-b1a" secondAttribute="leading" id="tJw-eH-Cr6"/>
+                            <constraint firstItem="M00-FX-bEb" firstAttribute="top" secondItem="pRb-EC-b1a" secondAttribute="top" id="wq8-Iq-tOe"/>
                         </constraints>
                     </customView>
                 </viewController>

@@ -11,7 +11,6 @@
 
 #import <Foundation/Foundation.h>
 #import "client.h"
-#import "opengl_cb.h"
 
 // helper functions
 NSDictionary* get_mpv_node_list_as_dict(mpv_node node);
