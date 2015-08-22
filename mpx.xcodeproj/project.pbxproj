@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		470A521C1B7A7F0900200D17 /* ControlUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470A521B1B7A7F0900200D17 /* ControlUIView.swift */; };
+		470A521C1B7A7F0900200D17 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470A521B1B7A7F0900200D17 /* VideoView.swift */; };
 		47AD85651B6CF6F700B5A3C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AD85641B6CF6F700B5A3C1 /* AppDelegate.swift */; };
 		47AD85691B6CF6F700B5A3C1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47AD85681B6CF6F700B5A3C1 /* Images.xcassets */; };
 		47AD856C1B6CF6F700B5A3C1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47AD856A1B6CF6F700B5A3C1 /* Main.storyboard */; };
@@ -17,7 +17,6 @@
 		47AD85C11B6D5FE300B5A3C1 /* XCGLogger.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD85B81B6D5F2900B5A3C1 /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		47AD85CE1B6EA6A800B5A3C1 /* swiftbridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 47AD85CD1B6EA6A800B5A3C1 /* swiftbridge.m */; };
 		47AD85D01B768FC100B5A3C1 /* PlayerWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AD85CF1B768FC100B5A3C1 /* PlayerWindowController.swift */; };
-		47AD85D21B77876400B5A3C1 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AD85D11B77876400B5A3C1 /* TitleView.swift */; };
 		47AD86251B77E11300B5A3C1 /* libmpv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD85E01B77AD2900B5A3C1 /* libmpv.dylib */; };
 		47AD86261B77E12800B5A3C1 /* libavcodec.56.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD85ED1B77DAD200B5A3C1 /* libavcodec.56.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		47AD86271B77E12800B5A3C1 /* libavdevice.56.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD85EE1B77DAD200B5A3C1 /* libavdevice.56.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -46,6 +45,9 @@
 		47AD863E1B77E12900B5A3C1 /* libvo-aacenc.0.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD86051B77DAD200B5A3C1 /* libvo-aacenc.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		47AD863F1B77E12900B5A3C1 /* libx264.144.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD86061B77DAD200B5A3C1 /* libx264.144.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		47AD86401B77E12900B5A3C1 /* libmpv.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD85E01B77AD2900B5A3C1 /* libmpv.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		47C5CEB11B86781600BE6554 /* PlayerWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C5CEB01B86781600BE6554 /* PlayerWindow.swift */; };
+		47C5CEB31B87C54900BE6554 /* ControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C5CEB21B87C54900BE6554 /* ControlView.swift */; };
+		47C5CEB51B87D1F700BE6554 /* ControlUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C5CEB41B87D1F700BE6554 /* ControlUIView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,7 +130,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		470A521B1B7A7F0900200D17 /* ControlUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ControlUIView.swift; path = mpx/ControlUIView.swift; sourceTree = "<group>"; };
+		470A521B1B7A7F0900200D17 /* VideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoView.swift; path = mpx/VideoView.swift; sourceTree = "<group>"; };
 		47AD855F1B6CF6F700B5A3C1 /* mpx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mpx.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47AD85631B6CF6F700B5A3C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		47AD85641B6CF6F700B5A3C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -141,7 +143,6 @@
 		47AD85AF1B6D5F2900B5A3C1 /* XCGLogger.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XCGLogger.xcodeproj; path = ../XCGLogger/XCGLogger/Library/XCGLogger.xcodeproj; sourceTree = "<group>"; };
 		47AD85CD1B6EA6A800B5A3C1 /* swiftbridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = swiftbridge.m; sourceTree = "<group>"; };
 		47AD85CF1B768FC100B5A3C1 /* PlayerWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerWindowController.swift; sourceTree = "<group>"; };
-		47AD85D11B77876400B5A3C1 /* TitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		47AD85E01B77AD2900B5A3C1 /* libmpv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmpv.dylib; sourceTree = "<group>"; };
 		47AD85E71B77ADCB00B5A3C1 /* client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = client.h; sourceTree = "<group>"; };
 		47AD85E91B77ADCB00B5A3C1 /* swiftbridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = swiftbridge.h; sourceTree = "<group>"; };
@@ -172,6 +173,9 @@
 		47AD86051B77DAD200B5A3C1 /* libvo-aacenc.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "libvo-aacenc.0.dylib"; sourceTree = "<group>"; };
 		47AD86061B77DAD200B5A3C1 /* libx264.144.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libx264.144.dylib; sourceTree = "<group>"; };
 		47AD86211B77DAF000B5A3C1 /* patch_libmpv.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = patch_libmpv.py; sourceTree = "<group>"; };
+		47C5CEB01B86781600BE6554 /* PlayerWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerWindow.swift; path = mpx/PlayerWindow.swift; sourceTree = "<group>"; };
+		47C5CEB21B87C54900BE6554 /* ControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ControlView.swift; path = mpx/ControlView.swift; sourceTree = "<group>"; };
+		47C5CEB41B87D1F700BE6554 /* ControlUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ControlUIView.swift; path = mpx/ControlUIView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -269,8 +273,10 @@
 		47AD85C41B6E08F800B5A3C1 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				47AD85D11B77876400B5A3C1 /* TitleView.swift */,
-				470A521B1B7A7F0900200D17 /* ControlUIView.swift */,
+				47C5CEB41B87D1F700BE6554 /* ControlUIView.swift */,
+				470A521B1B7A7F0900200D17 /* VideoView.swift */,
+				47C5CEB01B86781600BE6554 /* PlayerWindow.swift */,
+				47C5CEB21B87C54900BE6554 /* ControlView.swift */,
 			);
 			name = view;
 			path = ..;
@@ -474,10 +480,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				470A521C1B7A7F0900200D17 /* ControlUIView.swift in Sources */,
+				47C5CEB51B87D1F700BE6554 /* ControlUIView.swift in Sources */,
+				47C5CEB31B87C54900BE6554 /* ControlView.swift in Sources */,
+				470A521C1B7A7F0900200D17 /* VideoView.swift in Sources */,
+				47C5CEB11B86781600BE6554 /* PlayerWindow.swift in Sources */,
 				47AD85D01B768FC100B5A3C1 /* PlayerWindowController.swift in Sources */,
 				47AD85CE1B6EA6A800B5A3C1 /* swiftbridge.m in Sources */,
-				47AD85D21B77876400B5A3C1 /* TitleView.swift in Sources */,
 				47AD85981B6D51E900B5A3C1 /* MpvController.swift in Sources */,
 				47AD85651B6CF6F700B5A3C1 /* AppDelegate.swift in Sources */,
 			);

@@ -84,4 +84,14 @@ class PlayerWindowController: NSWindowController {
             NSApplication.sharedApplication().terminate(alert)
         }
     }
+    
+    override func mouseEntered(theEvent: NSEvent) {
+        if AppDelegate.getInstance().active {
+            self.window!.standardWindowButton(NSWindowButton.CloseButton)?.superview?.animator().alphaValue = 1
+        }
+    }
+    
+    override func mouseExited(theEvent: NSEvent) {
+            self.window!.standardWindowButton(NSWindowButton.CloseButton)?.superview?.animator().alphaValue = 0
+    }
 }
