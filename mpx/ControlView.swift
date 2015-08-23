@@ -8,11 +8,17 @@
 
 import Cocoa
 
-class ControlView: NSVisualEffectView {
+class ControlView: NSView {
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
     
     override func drawRect(dirtyRect: NSRect) {
+        self.superview!.layer!.cornerRadius = 5
+        self.superview!.layer!.masksToBounds = true
+        self.superview!.layer!.edgeAntialiasingMask = CAEdgeAntialiasingMask.LayerBottomEdge | CAEdgeAntialiasingMask.LayerLeftEdge | CAEdgeAntialiasingMask.LayerRightEdge | CAEdgeAntialiasingMask.LayerTopEdge
+        
         super.drawRect(dirtyRect)
-
-        // Drawing code here.
     }
 }

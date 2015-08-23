@@ -10,18 +10,23 @@ import AppKit
 import Cocoa
 import XCGLogger
 
-class PlayerWindowController: NSWindowController {
+class PlayerWindowController: NSWindowController, NSWindowDelegate {
     
     let logger = XCGLogger.defaultInstance()
 
+    var previousSize: NSRect?
     var currentSize: NSRect?
-    var title: String = "mpx"
     var titleBarView: NSView?
     var controlUIView: ControlUIView?
-
+    
+    // default values
+    var title: String = "mpx"
+    var fullscreen = false
     
     override func windowDidLoad() {
         super.windowDidLoad()
+        
+        self.window?.delegate = self
         
 		AppDelegate.getInstance().playerWindowController = self
         titleBarView = self.window!.standardWindowButton(NSWindowButton.CloseButton)?.superview
@@ -33,8 +38,28 @@ class PlayerWindowController: NSWindowController {
         center()
     }
     
-    func resize(#width: Int, height: Int) {
-        let visibleFrame = NSScreen.mainScreen()?.visibleFrame
+    override func mouseEntered(theEvent: NSEvent) {
+        if AppDelegate.getInstance().active {
+            titleBarView!.animator().alphaValue = 1
+            controlUIView!.animator().alphaValue = 1
+        }
+    }
+    
+    override func mouseExited(theEvent: NSEvent) {
+        if !fullscreen {
+            titleBarView!.animator().alphaValue = 0
+        }
+        controlUIView!.animator().alphaValue = 0
+    }
+    
+    func resize(#width: Int, height: Int, fullscreen: Bool) {
+        let screenFrame: NSRect
+        if fullscreen {
+            screenFrame = NSScreen.mainScreen()!.frame
+        } else {
+            screenFrame = NSScreen.mainScreen()!.visibleFrame
+        }
+        
         let size = NSSize(width: width, height: height)
         
         // cap new size to main screen resolution
@@ -43,14 +68,14 @@ class PlayerWindowController: NSWindowController {
         var w = CGFloat(size.width)
         var ar = w / h
         
-        var maxHeight = visibleFrame!.height// - menuBarHeight!
+        var maxHeight = screenFrame.height
         
         if (h > maxHeight) {
             h = maxHeight
             w = h * ar
         }
-        if (w > visibleFrame!.width) {
-            w = visibleFrame!.width
+        if (w > screenFrame.width) {
+            w = screenFrame.width
             h = w / ar
         }
         
@@ -59,13 +84,14 @@ class PlayerWindowController: NSWindowController {
             return
         }
         
-        // resize NSWindow with animation
-        let xOffset = (visibleFrame!.width - w) / 2
-        let yOffset = (visibleFrame!.height - h) / 2 + visibleFrame!.origin.y
+        self.previousSize = self.window!.frame
+        
+        let xOffset = (screenFrame.width - w) / 2
+        let yOffset = (screenFrame.height - h) / 2 + screenFrame.origin.y
         
         let frame = NSRect(x: xOffset, y: yOffset, width: w, height: h)
         
-        
+        // resize NSWindow with animation
         dispatch_async(dispatch_get_main_queue(), {
             self.window?.setFrame(frame, display: true, animate: true)
         })
@@ -89,15 +115,22 @@ class PlayerWindowController: NSWindowController {
         }
     }
     
-    override func mouseEntered(theEvent: NSEvent) {
-        if AppDelegate.getInstance().active {
-            titleBarView!.animator().alphaValue = 1
-            controlUIView!.animator().alphaValue = 1
-        }
+    func windowWillEnterFullScreen(notification: NSNotification) {
+        let screenSize = NSScreen.mainScreen()!.frame
+        resize(width: Int(screenSize.width), height: Int(screenSize.height), fullscreen: true)
+        self.fullscreen = true
     }
     
-    override func mouseExited(theEvent: NSEvent) {
-        titleBarView!.animator().alphaValue = 0
-        controlUIView!.animator().alphaValue = 0
+    func windowWillExitFullScreen(notification: NSNotification) {
+        if self.previousSize != nil {
+            resize(width: Int(self.previousSize!.width), height: Int(self.previousSize!.height), fullscreen: false)
+        } else {
+            // todo get video size
+        }
+        self.fullscreen = false
+    }
+    
+    func windowWillClose(notification: NSNotification) {
+        NSApplication.sharedApplication().stop(notification)
     }
 }

@@ -650,17 +650,26 @@
                             <view translatesAutoresizingMaskIntoConstraints="NO" id="LJC-5Z-ZMP" userLabel="UI View" customClass="ControlUIView" customModule="mpx" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="640" height="480"/>
                                 <subviews>
-                                    <visualEffectView blendingMode="withinWindow" material="appearanceBased" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="YNz-pc-8J0" userLabel="Control View" customClass="ControlView" customModule="mpx" customModuleProvider="target">
+                                    <visualEffectView appearanceType="vibrantDark" blendingMode="withinWindow" material="appearanceBased" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="GXI-KZ-grJ">
                                         <rect key="frame" x="40" y="20" width="560" height="60"/>
+                                        <subviews>
+                                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="Soc-Md-94L" customClass="ControlView" customModule="mpx" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="560" height="60"/>
+                                            </customView>
+                                        </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="BbY-gE-dmg"/>
+                                            <constraint firstAttribute="bottom" secondItem="Soc-Md-94L" secondAttribute="bottom" id="JdB-WH-P0S"/>
+                                            <constraint firstItem="Soc-Md-94L" firstAttribute="top" secondItem="GXI-KZ-grJ" secondAttribute="top" id="VoC-5J-w8T"/>
+                                            <constraint firstItem="Soc-Md-94L" firstAttribute="leading" secondItem="GXI-KZ-grJ" secondAttribute="leading" id="YrP-ma-B94"/>
+                                            <constraint firstAttribute="height" constant="60" id="nK7-yc-Pzf"/>
+                                            <constraint firstAttribute="trailing" secondItem="Soc-Md-94L" secondAttribute="trailing" id="rfi-iW-HzK"/>
                                         </constraints>
                                     </visualEffectView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="YNz-pc-8J0" secondAttribute="bottom" constant="20" id="0Sb-3E-P21"/>
-                                    <constraint firstItem="YNz-pc-8J0" firstAttribute="leading" secondItem="LJC-5Z-ZMP" secondAttribute="leading" constant="40" id="IiN-yU-qeD"/>
-                                    <constraint firstAttribute="trailing" secondItem="YNz-pc-8J0" secondAttribute="trailing" constant="40" id="OGc-gR-U6o"/>
+                                    <constraint firstItem="GXI-KZ-grJ" firstAttribute="leading" secondItem="LJC-5Z-ZMP" secondAttribute="leading" constant="40" id="2fh-OQ-O2C"/>
+                                    <constraint firstAttribute="trailing" secondItem="GXI-KZ-grJ" secondAttribute="trailing" constant="40" id="ZNI-NR-E4O"/>
+                                    <constraint firstAttribute="bottom" secondItem="GXI-KZ-grJ" secondAttribute="bottom" constant="20" id="cN1-AQ-Ydy"/>
                                 </constraints>
                                 <animations/>
                             </view>
