@@ -25,7 +25,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
 		// Initialize controllers
 		mpv = MpvController()
-        
 	}
 
 	func applicationWillTerminate(notification: NSNotification) {

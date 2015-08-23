@@ -107,7 +107,7 @@ class MpvController: NSObject {
 			var h: Int = dict["h"] as! Int
 			
 			logger.debug("original resolution: \(w)x\(h)")
-			AppDelegate.getInstance().playerWindowController?.resize(width: w, height: h, fullscreen: false)
+            AppDelegate.getInstance().playerWindowController?.resize(width: w, height: h)
 
         case MPV_EVENT_PLAYBACK_RESTART.value:
             logger.debug("playback restart")

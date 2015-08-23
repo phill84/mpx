@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 phill84. All rights reserved.
 //
 
-import AppKit
 import Cocoa
 import XCGLogger
 
@@ -14,8 +13,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     
     let logger = XCGLogger.defaultInstance()
 
-    var previousSize: NSRect?
-    var currentSize: NSRect?
+    var previousFrame: NSRect?
     var titleBarView: NSView?
     var controlUIView: ControlUIView?
     
@@ -31,9 +29,6 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
 		AppDelegate.getInstance().playerWindowController = self
         titleBarView = self.window!.standardWindowButton(NSWindowButton.CloseButton)?.superview
         controlUIView = self.window!.contentView.subviews[1] as? ControlUIView
-        
-        // get default size
-        currentSize = self.window?.frame
         
         center()
     }
@@ -52,13 +47,8 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         controlUIView!.animator().alphaValue = 0
     }
     
-    func resize(#width: Int, height: Int, fullscreen: Bool) {
-        let screenFrame: NSRect
-        if fullscreen {
-            screenFrame = NSScreen.mainScreen()!.frame
-        } else {
-            screenFrame = NSScreen.mainScreen()!.visibleFrame
-        }
+    func resize(#width: Int, height: Int) {
+        let screenFrame = NSScreen.mainScreen()!.visibleFrame
         
         let size = NSSize(width: width, height: height)
         
@@ -80,11 +70,10 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         }
         
         // don't do anything if currentSize is the same
-        if currentSize?.width == w && currentSize?.height == h {
+        let currentFrame = self.window?.frame
+        if currentFrame?.width == w && currentFrame?.height == h {
             return
         }
-        
-        self.previousSize = self.window!.frame
         
         let xOffset = (screenFrame.width - w) / 2
         let yOffset = (screenFrame.height - h) / 2 + screenFrame.origin.y
@@ -95,12 +84,15 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         dispatch_async(dispatch_get_main_queue(), {
             self.window?.setFrame(frame, display: true, animate: true)
         })
+        
+        self.previousFrame = currentFrame
     }
     
     func center() {
         let visibleFrame = NSScreen.mainScreen()?.visibleFrame
-        let x = (visibleFrame!.width - self.window!.frame.width) / 2
-        let y = (visibleFrame!.height - self.window!.frame.height) / 2 + visibleFrame!.origin.y
+        let currentFrame = self.window!.frame
+        let x = (visibleFrame!.width - currentFrame.width) / 2
+        let y = (visibleFrame!.height - currentFrame.height) / 2 + visibleFrame!.origin.y
         self.window!.setFrameOrigin(NSPoint(x: x, y: y))
     }
     
@@ -115,18 +107,46 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         }
     }
     
-    func windowWillEnterFullScreen(notification: NSNotification) {
-        let screenSize = NSScreen.mainScreen()!.frame
-        resize(width: Int(screenSize.width), height: Int(screenSize.height), fullscreen: true)
+    func customWindowsToEnterFullScreenForWindow(window: NSWindow) -> [AnyObject]? {
+        return [window]
+    }
+    
+    func window(window: NSWindow, startCustomAnimationToEnterFullScreenWithDuration duration: NSTimeInterval) {
+        let currentFrame = self.window!.frame
+        let screenFrame = NSScreen.mainScreen()!.frame
+        
+        var frame = currentFrame
+        frame.origin.x = (screenFrame.width - currentFrame.width) / 2
+        frame.origin.y = (screenFrame.height - currentFrame.height) / 2
+        
+        // custom fullscreen animation
+        // center than resize
+        NSAnimationContext.runAnimationGroup({ (context: NSAnimationContext!) -> Void in
+            context.duration = duration
+            window.animator().setFrame(frame, display: true)
+        }, completionHandler: { () -> Void in
+           window.setFrame(NSScreen.mainScreen()!.frame, display: true)
+        })
+        
+        self.previousFrame = currentFrame
+    }
+    
+    func customWindowsToExitFullScreenForWindow(window: NSWindow) -> [AnyObject]? {
+        return [window]
+    }
+    
+    func window(window: NSWindow, startCustomAnimationToExitFullScreenWithDuration duration: NSTimeInterval) {
+        // disable window resize animation
+        if previousFrame != nil {
+            window.setFrame(previousFrame!, display: true)
+        }
+    }
+    
+    func windowDidEnterFullScreen(notification: NSNotification) {
         self.fullscreen = true
     }
     
-    func windowWillExitFullScreen(notification: NSNotification) {
-        if self.previousSize != nil {
-            resize(width: Int(self.previousSize!.width), height: Int(self.previousSize!.height), fullscreen: false)
-        } else {
-            // todo get video size
-        }
+    func windowDidExitFullScreen(notification: NSNotification) {
         self.fullscreen = false
     }
     
