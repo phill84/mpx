@@ -15,13 +15,17 @@ class PlayerWindowController: NSWindowController {
     let logger = XCGLogger.defaultInstance()
 
     var currentSize: NSRect?
+    var title: String = "mpx"
+    var titleBarView: NSView?
+    var controlUIView: ControlUIView?
+
     
     override func windowDidLoad() {
         super.windowDidLoad()
         
-        self.window?.backgroundColor = NSColor.blackColor()
-    
 		AppDelegate.getInstance().playerWindowController = self
+        titleBarView = self.window!.standardWindowButton(NSWindowButton.CloseButton)?.superview
+        controlUIView = self.window!.contentView.subviews[1] as? ControlUIView
         
         // get default size
         currentSize = self.window?.frame
@@ -87,11 +91,13 @@ class PlayerWindowController: NSWindowController {
     
     override func mouseEntered(theEvent: NSEvent) {
         if AppDelegate.getInstance().active {
-            self.window!.standardWindowButton(NSWindowButton.CloseButton)?.superview?.animator().alphaValue = 1
+            titleBarView!.animator().alphaValue = 1
+            controlUIView!.animator().alphaValue = 1
         }
     }
     
     override func mouseExited(theEvent: NSEvent) {
-            self.window!.standardWindowButton(NSWindowButton.CloseButton)?.superview?.animator().alphaValue = 0
+        titleBarView!.animator().alphaValue = 0
+        controlUIView!.animator().alphaValue = 0
     }
 }

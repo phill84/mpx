@@ -15,5 +15,4 @@ class ControlView: NSVisualEffectView {
 
         // Drawing code here.
     }
-    
 }

@@ -20,6 +20,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	var mpv: MpvController?
 
 	func applicationDidFinishLaunching(notification: NSNotification) {
+        // change appearance to vibrant dark
+        self.playerWindowController!.window!.appearance = NSAppearance(named: NSAppearanceNameVibrantDark)
+        
 		// Initialize controllers
 		mpv = MpvController()
         
