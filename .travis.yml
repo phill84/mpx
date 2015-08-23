@@ -2,9 +2,9 @@ language: objective-c
 osx_image: xcode6.4
 xcode_project: mpx.xcodeproj
 xcode_scheme: mpx
-install:
-- brew update; brew update
+before_install:
+- brew update || brew update
 - brew outdated xctool || brew upgrade xctool
 before_script:
-- git clone https://github.com/DaveWoodCom/XCGLogger.git phill84/XCGLogger
-- git -C XCGLogger checkout tags/Version_2.2
+- git clone https://github.com/DaveWoodCom/XCGLogger.git ../XCGLogger
+- git -C ../XCGLogger checkout tags/Version_2.2
