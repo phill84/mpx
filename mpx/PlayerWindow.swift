@@ -21,11 +21,4 @@ class PlayerWindow: NSWindow {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
-    override func sendEvent(event: NSEvent) {
-        // do not send events to video view
-        if !(firstResponder is VideoView) {
-            super.sendEvent(event)
-        }
-    }
 }

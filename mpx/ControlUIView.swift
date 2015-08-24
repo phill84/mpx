@@ -39,5 +39,9 @@ class ControlUIView: NSView {
         addTrackingArea(area)
         
         super.updateTrackingAreas()
-    }    
+    }
+    
+    override func mouseDown(event: NSEvent) {
+        self.window?.windowController()?.mouseDown(event)
+    }
 }

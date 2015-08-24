@@ -33,18 +33,25 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         center()
     }
     
-    override func mouseEntered(theEvent: NSEvent) {
+    override func mouseEntered(event: NSEvent) {
         if AppDelegate.getInstance().active {
             titleBarView!.animator().alphaValue = 1
             controlUIView!.animator().alphaValue = 1
         }
     }
     
-    override func mouseExited(theEvent: NSEvent) {
+    override func mouseExited(event: NSEvent) {
         if !fullscreen {
             titleBarView!.animator().alphaValue = 0
         }
         controlUIView!.animator().alphaValue = 0
+    }
+    
+    override func mouseDown(event: NSEvent) {
+        // double click toggles fullscreen
+        if event.clickCount == 2 {
+            self.window?.toggleFullScreen(self)
+        }
     }
     
     func resize(#width: Int, height: Int) {
@@ -103,7 +110,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         alert.informativeText = error
         alert.alertStyle = NSAlertStyle.CriticalAlertStyle
         if alert.runModal() == NSAlertFirstButtonReturn {
-            NSApplication.sharedApplication().terminate(alert)
+            NSApplication.sharedApplication().terminate(self)
         }
     }
     
@@ -151,6 +158,6 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     }
     
     func windowWillClose(notification: NSNotification) {
-        NSApplication.sharedApplication().stop(notification)
+        NSApplication.sharedApplication().stop(self)
     }
 }
