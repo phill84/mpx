@@ -12,14 +12,17 @@ import XCGLogger
 class PlayerWindowController: NSWindowController, NSWindowDelegate {
     
     let logger = XCGLogger.defaultInstance()
+    let idleInterval = NSTimeInterval(2) // 2 seconds
 
     var previousFrame: NSRect?
     var titleBarView: NSView?
     var controlUIView: ControlUIView?
+    var idleTimer: NSTimer?
     
     // default values
     var title: String = "mpx"
     var fullscreen = false
+    
     
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -31,20 +34,19 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         controlUIView = self.window!.contentView.subviews[1] as? ControlUIView
         
         center()
+        resetIdleTimer()
     }
     
     override func mouseEntered(event: NSEvent) {
-        if AppDelegate.getInstance().active {
-            titleBarView!.animator().alphaValue = 1
-            controlUIView!.animator().alphaValue = 1
-        }
+        showControlUI()
     }
     
     override func mouseExited(event: NSEvent) {
-        if !fullscreen {
-            titleBarView!.animator().alphaValue = 0
-        }
-        controlUIView!.animator().alphaValue = 0
+        hideControlUI()
+    }
+    
+    override func mouseMoved(event: NSEvent) {
+        showControlUI()
     }
     
     override func mouseDown(event: NSEvent) {
@@ -52,6 +54,23 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         if event.clickCount == 2 {
             self.window?.toggleFullScreen(self)
         }
+    }
+    
+    func showControlUI() {
+        if AppDelegate.getInstance().active {
+            resetIdleTimer()
+            titleBarView!.animator().alphaValue = 1
+            controlUIView!.animator().alphaValue = 1
+        }
+    }
+    
+    func hideControlUI() {
+        // invalidate idleTimer since controlUI will be hidden already
+        self.idleTimer?.invalidate()
+        if !fullscreen {
+            titleBarView!.animator().alphaValue = 0
+        }
+        controlUIView!.animator().alphaValue = 0
     }
     
     func resize(#width: Int, height: Int) {
@@ -159,5 +178,11 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     
     func windowWillClose(notification: NSNotification) {
         NSApplication.sharedApplication().stop(self)
+    }
+    
+    func resetIdleTimer() {
+        self.idleTimer?.invalidate()
+        self.idleTimer = NSTimer(timeInterval: self.idleInterval, target: self, selector: Selector("hideControlUI"), userInfo: nil, repeats: true)
+        NSRunLoop.mainRunLoop().addTimer(self.idleTimer!, forMode: NSDefaultRunLoopMode)
     }
 }

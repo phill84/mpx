@@ -35,7 +35,8 @@ class ControlUIView: NSView {
                 removeTrackingArea(area as! NSTrackingArea)
             }
         }
-        let area = NSTrackingArea(rect: self.bounds, options: NSTrackingAreaOptions.MouseEnteredAndExited | NSTrackingAreaOptions.ActiveAlways, owner: self, userInfo: nil)
+        let area = NSTrackingArea(rect: self.bounds, options: NSTrackingAreaOptions.MouseEnteredAndExited |
+            NSTrackingAreaOptions.MouseMoved | NSTrackingAreaOptions.ActiveAlways, owner: self, userInfo: nil)
         addTrackingArea(area)
         
         super.updateTrackingAreas()
