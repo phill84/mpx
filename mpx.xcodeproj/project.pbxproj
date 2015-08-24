@@ -48,6 +48,7 @@
 		47C5CEB11B86781600BE6554 /* PlayerWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C5CEB01B86781600BE6554 /* PlayerWindow.swift */; };
 		47C5CEB31B87C54900BE6554 /* ControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C5CEB21B87C54900BE6554 /* ControlView.swift */; };
 		47C5CEB51B87D1F700BE6554 /* ControlUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C5CEB41B87D1F700BE6554 /* ControlUIView.swift */; };
+		47EAAC531B8BBE3400EC1461 /* PlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EAAC521B8BBE3400EC1461 /* PlayerState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -183,6 +184,7 @@
 		47C5CEB01B86781600BE6554 /* PlayerWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerWindow.swift; path = mpx/PlayerWindow.swift; sourceTree = "<group>"; };
 		47C5CEB21B87C54900BE6554 /* ControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ControlView.swift; path = mpx/ControlView.swift; sourceTree = "<group>"; };
 		47C5CEB41B87D1F700BE6554 /* ControlUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ControlUIView.swift; path = mpx/ControlUIView.swift; sourceTree = "<group>"; };
+		47EAAC521B8BBE3400EC1461 /* PlayerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -295,6 +297,7 @@
 			children = (
 				47AD85971B6D51E900B5A3C1 /* MpvController.swift */,
 				47AD85CF1B768FC100B5A3C1 /* PlayerWindowController.swift */,
+				47EAAC521B8BBE3400EC1461 /* PlayerState.swift */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -496,6 +499,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				47C5CEB51B87D1F700BE6554 /* ControlUIView.swift in Sources */,
+				47EAAC531B8BBE3400EC1461 /* PlayerState.swift in Sources */,
 				47C5CEB31B87C54900BE6554 /* ControlView.swift in Sources */,
 				470A521C1B7A7F0900200D17 /* VideoView.swift in Sources */,
 				47C5CEB11B86781600BE6554 /* PlayerWindow.swift in Sources */,

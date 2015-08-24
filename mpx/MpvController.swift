@@ -13,21 +13,28 @@ import XCGLogger
 class MpvController: NSObject {
 	
 	let logger = XCGLogger.defaultInstance()
+    let playerWindowController: PlayerWindowController
 	
 	var context: COpaquePointer?
 	var mpvQueue: dispatch_queue_t?
+    var videoOriginalSize: NSSize?
+    var videoCurrentSize: NSSize?
+    
+    var state: PlayerState = .Uninitialized
 	
 	override init() {
+        playerWindowController = NSApplication.sharedApplication().windows[0].windowController() as! PlayerWindowController
 		super.init()
-		
+        playerWindowController.mpv = self
+        
 		// initialize mpv
 		context = mpv_create()
 		if (context == nil) {
             let error = "failed to create mpv context"
 			logger.severe(error)
-			AppDelegate.getInstance().playerWindowController?.alertAndExit(error)
+			playerWindowController.alertAndExit(error)
 		}
-		logger.debug("mpv context created: \(self.context!.debugDescription)")
+		logger.debug("mpv context created: \(context!.debugDescription)")
 		
 		checkError(mpv_initialize(context!))
 		checkError(mpv_request_log_messages(context!, "warn"))
@@ -35,7 +42,7 @@ class MpvController: NSObject {
 		mpvQueue = dispatch_queue_create("mpv", DISPATCH_QUEUE_SERIAL)
 		
         // set default options
-        var videoView: AnyObject? = AppDelegate.getInstance().playerWindowController?.window?.contentView.subviews[0]
+        var videoView: AnyObject? = playerWindowController.window?.contentView.subviews[0]
         checkError(mpv_set_option(context!, "wid", MPV_FORMAT_INT64, &videoView))
         checkError(mpv_set_option_string(context!, "audio-client-name", "mpx"))
         checkError(mpv_set_option_string(context!, "hwdec", "auto"))
@@ -44,6 +51,7 @@ class MpvController: NSObject {
         
 		// register callbacks
 		mpv_set_wakeup_callback(context!, getWakeupCallback(), unsafeBitCast(self, UnsafeMutablePointer<Void>.self));
+        state = .Initialized
 	}
 	
 	func getWakeupCallback() -> CFunctionPointer<(UnsafeMutablePointer<Void> -> Void)> {
@@ -60,7 +68,7 @@ class MpvController: NSObject {
 		if (status < 0) {
             let error = String.fromCString(mpv_error_string(status))!
 			logger.error("mpv API error: \(error)")
-            AppDelegate.getInstance().playerWindowController?.alertAndExit(error)
+            playerWindowController.alertAndExit(error)
 		}
 	}
 	
@@ -80,6 +88,9 @@ class MpvController: NSObject {
 	
 	func handleEvent(event: mpv_event) {
 		switch event.event_id.value {
+        case MPV_EVENT_IDLE.value:
+            state = .Idle
+            
 		case MPV_EVENT_SHUTDOWN.value:
 			logger.debug("mpv shutdown")
 			
@@ -107,10 +118,20 @@ class MpvController: NSObject {
 			var h: Int = dict["h"] as! Int
 			
 			logger.debug("original resolution: \(w)x\(h)")
-            AppDelegate.getInstance().playerWindowController?.resize(width: w, height: h)
+            videoOriginalSize = NSSize(width: w, height: h)
+            if playerWindowController.fullscreen {
+                let mainFrame = NSScreen.mainScreen()!.frame
+                videoCurrentSize = NSSize(width: mainFrame.width, height: mainFrame.height)
+            } else {
+                videoCurrentSize = playerWindowController.resize(width: videoOriginalSize!.width,
+                    height: videoOriginalSize!.height)
+            }
+            
+            state = .FileLoaded
 
         case MPV_EVENT_PLAYBACK_RESTART.value:
             logger.debug("playback restart")
+            state = .Playing
 
 		default:
 			let eventName = String.fromCString(mpv_event_name(event.event_id))!
@@ -118,7 +139,6 @@ class MpvController: NSObject {
             if event.data != nil {
                 logger.debug("event data: \(event.data)")
             }
-			
 		}
 	}
 	

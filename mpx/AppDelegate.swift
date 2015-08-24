@@ -14,14 +14,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 	let logger = XCGLogger.defaultInstance()
 	
-    var active = false;
+    var active = false
     
-	var playerWindowController: PlayerWindowController?
 	var mpv: MpvController?
 
 	func applicationDidFinishLaunching(notification: NSNotification) {
         // change appearance to vibrant dark
-        self.playerWindowController!.window!.appearance = NSAppearance(named: NSAppearanceNameVibrantDark)
+        let playerWindow = NSApplication.sharedApplication().windows[0] as! PlayerWindow
+        playerWindow.appearance = NSAppearance(named: NSAppearanceNameVibrantDark)
         
 		// Initialize controllers
 		mpv = MpvController()

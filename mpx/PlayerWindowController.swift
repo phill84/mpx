@@ -14,6 +14,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     let logger = XCGLogger.defaultInstance()
     let idleInterval = NSTimeInterval(2) // 2 seconds
 
+    weak var mpv: MpvController?
     var previousFrame: NSRect?
     var titleBarView: NSView?
     var controlUIView: ControlUIView?
@@ -28,8 +29,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         super.windowDidLoad()
         
         self.window?.delegate = self
-        
-		AppDelegate.getInstance().playerWindowController = self
+
         titleBarView = self.window!.standardWindowButton(NSWindowButton.CloseButton)?.superview
         controlUIView = self.window!.contentView.subviews[1] as? ControlUIView
         
@@ -73,15 +73,15 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         controlUIView!.animator().alphaValue = 0
     }
     
-    func resize(#width: Int, height: Int) {
+    func resize(#width: CGFloat, height: CGFloat) -> NSSize {
         let screenFrame = NSScreen.mainScreen()!.visibleFrame
         
         let size = NSSize(width: width, height: height)
         
         // cap new size to main screen resolution
         // while preserving the aspect ratio
-        var h = CGFloat(size.height)
-        var w = CGFloat(size.width)
+        var h = size.height
+        var w = size.width
         var ar = w / h
         
         var maxHeight = screenFrame.height
@@ -98,7 +98,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         // don't do anything if currentSize is the same
         let currentFrame = self.window?.frame
         if currentFrame?.width == w && currentFrame?.height == h {
-            return
+            return NSSize(width: w, height: h)
         }
         
         let xOffset = (screenFrame.width - w) / 2
@@ -112,6 +112,8 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         })
         
         self.previousFrame = currentFrame
+        
+        return NSSize(width: frame.width, height: frame.height)
     }
     
     func center() {
@@ -154,7 +156,10 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
            window.setFrame(NSScreen.mainScreen()!.frame, display: true)
         })
         
-        self.previousFrame = currentFrame
+        // only remember previous window size if playback has started
+        if mpv!.state == .Playing || mpv!.state == .Paused {
+            self.previousFrame = currentFrame
+        }
     }
     
     func customWindowsToExitFullScreenForWindow(window: NSWindow) -> [AnyObject]? {
@@ -165,6 +170,9 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         // disable window resize animation
         if previousFrame != nil {
             window.setFrame(previousFrame!, display: true)
+        } else {
+            let originalSize = AppDelegate.getInstance().mpv!.videoOriginalSize!
+            resize(width: originalSize.width, height: originalSize.height)
         }
     }
     
