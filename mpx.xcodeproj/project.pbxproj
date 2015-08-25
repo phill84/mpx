@@ -48,6 +48,7 @@
 		47C5CEB31B87C54900BE6554 /* ControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C5CEB21B87C54900BE6554 /* ControlView.swift */; };
 		47C5CEB51B87D1F700BE6554 /* ControlUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C5CEB41B87D1F700BE6554 /* ControlUIView.swift */; };
 		47EAAC531B8BBE3400EC1461 /* PlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EAAC521B8BBE3400EC1461 /* PlayerState.swift */; };
+		47EAAC551B8D095100EC1461 /* mpxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EAAC541B8D095100EC1461 /* mpxTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -183,6 +184,7 @@
 		47C5CEB21B87C54900BE6554 /* ControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ControlView.swift; path = mpx/ControlView.swift; sourceTree = "<group>"; };
 		47C5CEB41B87D1F700BE6554 /* ControlUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ControlUIView.swift; path = mpx/ControlUIView.swift; sourceTree = "<group>"; };
 		47EAAC521B8BBE3400EC1461 /* PlayerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerState.swift; sourceTree = "<group>"; };
+		47EAAC541B8D095100EC1461 /* mpxTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mpxTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,6 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				47AD85751B6CF6F700B5A3C1 /* Supporting Files */,
+				47EAAC541B8D095100EC1461 /* mpxTests.swift */,
 			);
 			path = mpxTests;
 			sourceTree = "<group>";
@@ -511,6 +514,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47EAAC551B8D095100EC1461 /* mpxTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -666,6 +670,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -678,6 +683,7 @@
 				INFOPLIST_FILE = mpxTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mpx.app/Contents/MacOS/mpx";
 			};
 			name = Debug;
@@ -686,6 +692,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
