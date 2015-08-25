@@ -11,7 +11,6 @@
 		47AD85651B6CF6F700B5A3C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AD85641B6CF6F700B5A3C1 /* AppDelegate.swift */; };
 		47AD85691B6CF6F700B5A3C1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47AD85681B6CF6F700B5A3C1 /* Images.xcassets */; };
 		47AD856C1B6CF6F700B5A3C1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47AD856A1B6CF6F700B5A3C1 /* Main.storyboard */; };
-		47AD85781B6CF6F700B5A3C1 /* mpxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AD85771B6CF6F700B5A3C1 /* mpxTests.swift */; };
 		47AD85981B6D51E900B5A3C1 /* MpvController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AD85971B6D51E900B5A3C1 /* MpvController.swift */; };
 		47AD85C01B6D5FE300B5A3C1 /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD85B81B6D5F2900B5A3C1 /* XCGLogger.framework */; };
 		47AD85C11B6D5FE300B5A3C1 /* XCGLogger.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD85B81B6D5F2900B5A3C1 /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -146,7 +145,6 @@
 		47AD856B1B6CF6F700B5A3C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		47AD85711B6CF6F700B5A3C1 /* mpxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mpxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		47AD85761B6CF6F700B5A3C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		47AD85771B6CF6F700B5A3C1 /* mpxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mpxTests.swift; sourceTree = "<group>"; };
 		47AD85971B6D51E900B5A3C1 /* MpvController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MpvController.swift; sourceTree = "<group>"; };
 		47AD85AF1B6D5F2900B5A3C1 /* XCGLogger.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XCGLogger.xcodeproj; path = ../XCGLogger/XCGLogger/Library/XCGLogger.xcodeproj; sourceTree = "<group>"; };
 		47AD85CD1B6EA6A800B5A3C1 /* swiftbridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = swiftbridge.m; sourceTree = "<group>"; };
@@ -255,7 +253,6 @@
 		47AD85741B6CF6F700B5A3C1 /* mpxTests */ = {
 			isa = PBXGroup;
 			children = (
-				47AD85771B6CF6F700B5A3C1 /* mpxTests.swift */,
 				47AD85751B6CF6F700B5A3C1 /* Supporting Files */,
 			);
 			path = mpxTests;
@@ -514,7 +511,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				47AD85781B6CF6F700B5A3C1 /* mpxTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

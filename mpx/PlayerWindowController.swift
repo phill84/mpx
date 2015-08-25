@@ -15,6 +15,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     let idleInterval = NSTimeInterval(2) // 2 seconds
 
     weak var mpv: MpvController?
+    var defaultFrame: NSRect?
     var previousFrame: NSRect?
     var titleBarView: NSView?
     var controlUIView: ControlUIView?
@@ -28,10 +29,11 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     override func windowDidLoad() {
         super.windowDidLoad()
         
-        self.window?.delegate = self
+        window?.delegate = self
+        defaultFrame = window?.frame
 
-        titleBarView = self.window!.standardWindowButton(NSWindowButton.CloseButton)?.superview
-        controlUIView = self.window!.contentView.subviews[1] as? ControlUIView
+        titleBarView = window!.standardWindowButton(NSWindowButton.CloseButton)?.superview
+        controlUIView = window!.contentView.subviews[1] as? ControlUIView
         
         center()
         resetIdleTimer()
@@ -52,7 +54,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     override func mouseDown(event: NSEvent) {
         // double click toggles fullscreen
         if event.clickCount == 2 {
-            self.window?.toggleFullScreen(self)
+            window?.toggleFullScreen(self)
         }
     }
     
@@ -66,7 +68,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     
     func hideControlUI() {
         // invalidate idleTimer since controlUI will be hidden already
-        self.idleTimer?.invalidate()
+        idleTimer?.invalidate()
         if !fullscreen {
             titleBarView!.animator().alphaValue = 0
         }
@@ -96,7 +98,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         }
         
         // don't do anything if currentSize is the same
-        let currentFrame = self.window?.frame
+        let currentFrame = window?.frame
         if currentFrame?.width == w && currentFrame?.height == h {
             return NSSize(width: w, height: h)
         }
@@ -111,7 +113,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
             self.window?.setFrame(frame, display: true, animate: true)
         })
         
-        self.previousFrame = currentFrame
+        previousFrame = currentFrame
         
         return NSSize(width: frame.width, height: frame.height)
     }
@@ -121,7 +123,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         let currentFrame = self.window!.frame
         let x = (visibleFrame!.width - currentFrame.width) / 2
         let y = (visibleFrame!.height - currentFrame.height) / 2 + visibleFrame!.origin.y
-        self.window!.setFrameOrigin(NSPoint(x: x, y: y))
+        window?.setFrameOrigin(NSPoint(x: x, y: y))
     }
     
     func alertAndExit(error: String) {
@@ -140,7 +142,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     }
     
     func window(window: NSWindow, startCustomAnimationToEnterFullScreenWithDuration duration: NSTimeInterval) {
-        let currentFrame = self.window!.frame
+        let currentFrame = window.frame
         let screenFrame = NSScreen.mainScreen()!.frame
         
         var frame = currentFrame
@@ -158,7 +160,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         
         // only remember previous window size if playback has started
         if mpv!.state == .Playing || mpv!.state == .Paused {
-            self.previousFrame = currentFrame
+            previousFrame = currentFrame
         }
     }
     
@@ -168,11 +170,16 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     
     func window(window: NSWindow, startCustomAnimationToExitFullScreenWithDuration duration: NSTimeInterval) {
         // disable window resize animation
-        if previousFrame != nil {
-            window.setFrame(previousFrame!, display: true)
+        if mpv!.state == .Playing || mpv!.state == .Paused {
+            if previousFrame != nil {
+                window.setFrame(previousFrame!, display: true)
+            } else if let originalSize = AppDelegate.getInstance().mpv!.videoOriginalSize {
+                resize(width: originalSize.width, height: originalSize.height)
+            } else {
+                window.setFrame(defaultFrame!, display: true)
+            }
         } else {
-            let originalSize = AppDelegate.getInstance().mpv!.videoOriginalSize!
-            resize(width: originalSize.width, height: originalSize.height)
+            window.setFrame(defaultFrame!, display: true)
         }
     }
     
@@ -192,5 +199,13 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         self.idleTimer?.invalidate()
         self.idleTimer = NSTimer(timeInterval: self.idleInterval, target: self, selector: Selector("hideControlUI"), userInfo: nil, repeats: true)
         NSRunLoop.mainRunLoop().addTimer(self.idleTimer!, forMode: NSDefaultRunLoopMode)
+    }
+    
+    func updateTitle(title: String) {
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            self.willChangeValueForKey("title")
+            self.title = title
+            self.didChangeValueForKey("title")
+        })
     }
 }

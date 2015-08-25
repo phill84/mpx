@@ -103,22 +103,12 @@ class MpvController: NSObject {
             if !text.isEmpty {
                 logger.debug("[\(prefix)] \(level): \(text)")
             }
-        
 			
 		case MPV_EVENT_FILE_LOADED.value:
-			var videoParams: mpv_node?
-			mpv_get_property(context!, "video-params", MPV_FORMAT_NODE, &videoParams)
-			
-			if (videoParams == nil) {
-				return
-			}
-			
-			var dict = get_mpv_node_list_as_dict(videoParams!) as! Dictionary<String, AnyObject>
-			var w: Int = dict["w"] as! Int
-			var h: Int = dict["h"] as! Int
-			
-			logger.debug("original resolution: \(w)x\(h)")
-            videoOriginalSize = NSSize(width: w, height: h)
+            state = .FileLoaded
+            
+            // get video size and resize if necessary
+			videoOriginalSize = getVideoSize()
             if playerWindowController.fullscreen {
                 let mainFrame = NSScreen.mainScreen()!.frame
                 videoCurrentSize = NSSize(width: mainFrame.width, height: mainFrame.height)
@@ -127,11 +117,14 @@ class MpvController: NSObject {
                     height: videoOriginalSize!.height)
             }
             
-            state = .FileLoaded
+            // update window title
+            if let title = getVideoTitle() {
+                playerWindowController.updateTitle(title)
+            }
 
         case MPV_EVENT_PLAYBACK_RESTART.value:
-            logger.debug("playback restart")
             state = .Playing
+            logger.debug("playback restart")
 
 		default:
 			let eventName = String.fromCString(mpv_event_name(event.event_id))!
@@ -142,6 +135,31 @@ class MpvController: NSObject {
 		}
 	}
 	
+    func getVideoSize() -> NSSize? {
+        var videoParams: mpv_node?
+        mpv_get_property(context!, "video-params", MPV_FORMAT_NODE, &videoParams)
+        
+        if (videoParams == nil) {
+            return nil
+        }
+        
+        let dict = get_mpv_node_list_as_dict(videoParams!) as! Dictionary<String, AnyObject>
+        let w: Int = dict["w"] as! Int
+        let h: Int = dict["h"] as! Int
+        
+        logger.debug("original resolution: \(w)x\(h)")
+        return NSSize(width: w, height: h)
+    }
+    
+    func getVideoTitle() -> String? {
+        let title = mpv_get_property_string(context!, "media-title")
+        if title == nil {
+            return nil
+        } else {
+            return String.fromCString(title)
+        }
+    }
+    
 	func openMediaFiles(url: NSURL) {
 		dispatch_async(mpvQueue!, {
 			self.logger.debug("attempt to open \(url.debugDescription)")

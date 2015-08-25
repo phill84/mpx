@@ -618,7 +618,11 @@
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <contentBorderThickness minY="0.0" maxY="0.0"/>
                         <connections>
-                            <binding destination="B8D-0N-5wS" name="title" keyPath="title" id="NXw-J3-MwN"/>
+                            <binding destination="B8D-0N-5wS" name="title" keyPath="title" id="ie0-C1-uCX">
+                                <dictionary key="options">
+                                    <string key="NSNullPlaceholder">mpx</string>
+                                </dictionary>
+                            </binding>
                         </connections>
                     </window>
                     <connections>
