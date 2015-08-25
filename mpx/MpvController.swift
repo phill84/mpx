@@ -116,6 +116,8 @@ class MpvController: NSObject {
                 videoCurrentSize = playerWindowController.resize(width: videoOriginalSize!.width,
                     height: videoOriginalSize!.height)
             }
+            playerWindowController.showWindow()
+            AppDelegate.getInstance().mediaFileLoaded = true
             
             // update window title
             if let title = getVideoTitle() {

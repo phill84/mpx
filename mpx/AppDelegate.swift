@@ -15,13 +15,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	let logger = XCGLogger.defaultInstance()
 	
     var active = false
+    var mediaFileLoaded = false
     
 	var mpv: MpvController?
-
+    
+    static func getInstance() -> AppDelegate {
+        return NSApplication.sharedApplication().delegate as! AppDelegate
+    }
+    
 	func applicationDidFinishLaunching(notification: NSNotification) {
+
         // change appearance to vibrant dark
         let playerWindow = NSApplication.sharedApplication().windows[0] as! PlayerWindow
         playerWindow.appearance = NSAppearance(named: NSAppearanceNameVibrantDark)
+        playerWindow.orderOut(self)
         
 		// Initialize controllers
 		mpv = MpvController()
@@ -38,10 +45,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidResignActive(notification: NSNotification) {
         active = false
     }
-
-	static func getInstance() -> AppDelegate {
-		return NSApplication.sharedApplication().delegate as! AppDelegate
-	}
 	
 	@IBAction func openMediaFile(sender: AnyObject) {
 		var openPanel = NSOpenPanel()
@@ -59,5 +62,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			self.mpv?.openMediaFiles(openPanel.URLs.first! as! NSURL)
 		}
 	}
+
 }
 

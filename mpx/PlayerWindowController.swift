@@ -53,7 +53,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     
     override func mouseDown(event: NSEvent) {
         // double click toggles fullscreen
-        if event.clickCount == 2 {
+        if event.clickCount == 2 && AppDelegate.getInstance().mediaFileLoaded {
             window?.toggleFullScreen(self)
         }
     }
@@ -64,6 +64,18 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
             titleBarView!.animator().alphaValue = 1
             controlUIView!.animator().alphaValue = 1
         }
+    }
+    
+    func hideWindow() {
+        dispatch_async(dispatch_get_main_queue(), {
+            window?.orderOut(self)
+        })
+    }
+    
+    func showWindow() {
+        dispatch_async(dispatch_get_main_queue(), {
+            self.showWindow(self)
+        })
     }
     
     func hideControlUI() {
@@ -110,7 +122,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         
         // resize NSWindow with animation
         dispatch_async(dispatch_get_main_queue(), {
-            self.window?.setFrame(frame, display: true, animate: true)
+            self.window?.setFrame(frame, display: true, animate: false)
         })
         
         previousFrame = currentFrame
