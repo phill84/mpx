@@ -18,7 +18,6 @@ class MpvController: NSObject {
 	var context: COpaquePointer?
 	var mpvQueue: dispatch_queue_t?
     var videoOriginalSize: NSSize?
-    var videoCurrentSize: NSSize?
     
     var state: PlayerState = .Uninitialized
 	
@@ -109,12 +108,11 @@ class MpvController: NSObject {
             
             // get video size and resize if necessary
 			videoOriginalSize = getVideoSize()
-            if playerWindowController.fullscreen {
+            if AppDelegate.getInstance().fullscreen {
                 let mainFrame = NSScreen.mainScreen()!.frame
-                videoCurrentSize = NSSize(width: mainFrame.width, height: mainFrame.height)
+                NSSize(width: mainFrame.width, height: mainFrame.height)
             } else {
-                videoCurrentSize = playerWindowController.resize(width: videoOriginalSize!.width,
-                    height: videoOriginalSize!.height)
+                playerWindowController.resize(width: videoOriginalSize!.width, height: videoOriginalSize!.height)
             }
             playerWindowController.showWindow()
             AppDelegate.getInstance().mediaFileLoaded = true

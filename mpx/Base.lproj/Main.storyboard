@@ -310,16 +310,46 @@
                                     <items>
                                         <menuItem title="Half Size" enabled="NO" keyEquivalent="`" id="Kal-HA-p7s">
                                             <connections>
+                                                <action selector="resizeHalf:" target="Voe-Tx-rLC" id="d5c-ri-6fz"/>
+                                                <binding destination="Voe-Tx-rLC" name="enabled2" keyPath="fullscreen" previousBinding="7pR-Qg-5PQ" id="o1Y-Pi-Bkd">
+                                                    <dictionary key="options">
+                                                        <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                                        <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                                        <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                                        <integer key="NSNullPlaceholder" value="-1"/>
+                                                        <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                                    </dictionary>
+                                                </binding>
                                                 <binding destination="Voe-Tx-rLC" name="enabled" keyPath="mediaFileLoaded" id="7pR-Qg-5PQ"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Original Size" enabled="NO" keyEquivalent="1" id="qUs-x1-xxi">
                                             <connections>
+                                                <action selector="resizeOriginal:" target="Voe-Tx-rLC" id="00r-J5-ozP"/>
+                                                <binding destination="Voe-Tx-rLC" name="enabled2" keyPath="fullscreen" previousBinding="jWI-DR-VRu" id="TlF-IT-6NJ">
+                                                    <dictionary key="options">
+                                                        <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                                        <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                                        <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                                        <integer key="NSNullPlaceholder" value="-1"/>
+                                                        <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                                    </dictionary>
+                                                </binding>
                                                 <binding destination="Voe-Tx-rLC" name="enabled" keyPath="mediaFileLoaded" id="jWI-DR-VRu"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Double Size" enabled="NO" keyEquivalent="2" id="gQD-V5-Y3a">
                                             <connections>
+                                                <action selector="resizeDouble:" target="Voe-Tx-rLC" id="TJJ-oz-e59"/>
+                                                <binding destination="Voe-Tx-rLC" name="enabled2" keyPath="fullscreen" previousBinding="UOs-oe-dGr" id="LzH-KX-xaZ">
+                                                    <dictionary key="options">
+                                                        <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                                        <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                                        <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                                        <integer key="NSNullPlaceholder" value="-1"/>
+                                                        <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                                    </dictionary>
+                                                </binding>
                                                 <binding destination="Voe-Tx-rLC" name="enabled" keyPath="mediaFileLoaded" id="UOs-oe-dGr"/>
                                             </connections>
                                         </menuItem>

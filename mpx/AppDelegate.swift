@@ -15,9 +15,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	let logger = XCGLogger.defaultInstance()
 	
     var active = false
+    var fullscreen = false
     var mediaFileLoaded = false
     
 	var mpv: MpvController?
+    var playerWindowController: PlayerWindowController?
     
     static func getInstance() -> AppDelegate {
         return NSApplication.sharedApplication().delegate as! AppDelegate
@@ -29,6 +31,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let playerWindow = NSApplication.sharedApplication().windows[0] as! PlayerWindow
         playerWindow.appearance = NSAppearance(named: NSAppearanceNameVibrantDark)
         playerWindow.orderOut(self)
+        
+        playerWindowController = playerWindow.windowController() as? PlayerWindowController
         
 		// Initialize controllers
 		mpv = MpvController()
@@ -63,5 +67,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		}
 	}
 
+    @IBAction func resizeHalf(sender: AnyObject) {
+        playerWindowController!.resizeHalf()
+    }
+    
+    @IBAction func resizeOriginal(sender: NSMenuItem) {
+        playerWindowController!.resizeOriginal()
+    }
+    
+    @IBAction func resizeDouble(sender: AnyObject) {
+        playerWindowController!.resizeDouble()
+    }
 }
 

@@ -22,9 +22,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     var idleTimer: NSTimer?
     
     // default values
-    var title: String = "mpx"
-    var fullscreen = false
-    
+    var title: String = "mpx"    
     
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -44,7 +42,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     }
     
     override func mouseExited(event: NSEvent) {
-        hideControlUI()
+//        hideControlUI()
     }
     
     override func mouseMoved(event: NSEvent) {
@@ -81,13 +79,13 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     func hideControlUI() {
         // invalidate idleTimer since controlUI will be hidden already
         idleTimer?.invalidate()
-        if !fullscreen {
+        if !AppDelegate.getInstance().fullscreen {
             titleBarView!.animator().alphaValue = 0
         }
         controlUIView!.animator().alphaValue = 0
     }
     
-    func resize(#width: CGFloat, height: CGFloat) -> NSSize {
+    func resize(#width: CGFloat, height: CGFloat) {
         let screenFrame = NSScreen.mainScreen()!.visibleFrame
         
         let size = NSSize(width: width, height: height)
@@ -112,7 +110,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         // don't do anything if currentSize is the same
         let currentFrame = window?.frame
         if currentFrame?.width == w && currentFrame?.height == h {
-            return NSSize(width: w, height: h)
+            return
         }
         
         let xOffset = (screenFrame.width - w) / 2
@@ -126,8 +124,6 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         })
         
         previousFrame = currentFrame
-        
-        return NSSize(width: frame.width, height: frame.height)
     }
     
     func center() {
@@ -196,11 +192,11 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     }
     
     func windowDidEnterFullScreen(notification: NSNotification) {
-        self.fullscreen = true
+        AppDelegate.getInstance().fullscreen = true
     }
     
     func windowDidExitFullScreen(notification: NSNotification) {
-        self.fullscreen = false
+        AppDelegate.getInstance().fullscreen = false
     }
     
     func windowWillClose(notification: NSNotification) {
@@ -219,5 +215,20 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
             self.title = title
             self.didChangeValueForKey("title")
         })
+    }
+    
+    func resizeHalf() {
+        let originalSize = mpv!.videoOriginalSize!
+        resize(width: originalSize.width / 2, height: originalSize.height / 2)
+    }
+    
+    func resizeOriginal() {
+        let originalSize = mpv!.videoOriginalSize!
+        resize(width: originalSize.width, height: originalSize.height)
+    }
+    
+    func resizeDouble() {
+        let originalSize = mpv!.videoOriginalSize!
+        resize(width: originalSize.width * 2, height: originalSize.height * 2)
     }
 }
