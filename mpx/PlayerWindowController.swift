@@ -55,6 +55,22 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
             window?.toggleFullScreen(self)
         }
     }
+	
+	override func keyDown(event: NSEvent) {
+		let keyCode = event.keyCode
+		
+		switch event.keyCode {
+		case 49: // space
+			logger.debug("space")
+			mpv!.togglePause()
+		case 123: // left
+			logger.debug("left")
+		case 124: // right
+			logger.debug("right arrow")
+		default:
+			logger.debug("keycode: \(event.keyCode)")
+		}
+	}
     
     func showControlUI() {
         if AppDelegate.getInstance().active {

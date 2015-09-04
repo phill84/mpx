@@ -124,8 +124,16 @@ class MpvController: NSObject {
 
         case MPV_EVENT_PLAYBACK_RESTART.value:
             state = .Playing
-            logger.debug("playback restart")
+            logger.debug("playback started")
 
+		case MPV_EVENT_PAUSE.value:
+			state = .Paused
+			logger.debug("playback paused")
+		
+		case MPV_EVENT_UNPAUSE.value:
+			state = .Playing
+			logger.debug("playback unpaused")
+			
 		default:
 			let eventName = String.fromCString(mpv_event_name(event.event_id))!
 			logger.debug("event name: \(eventName)")
@@ -170,5 +178,16 @@ class MpvController: NSObject {
 			]
 			mpv_command(self.context!, &cmd)
 		})
+	}
+	
+	func togglePause() {
+		var pause = 1
+		
+		if state == .Playing {
+			pause = 1
+		} else if state == .Paused {
+			pause = 0
+		}
+		mpv_set_property(context!, "pause", MPV_FORMAT_FLAG, &pause);
 	}
 }
