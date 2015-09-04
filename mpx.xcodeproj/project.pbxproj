@@ -643,6 +643,7 @@
 					"$(PROJECT_DIR)/lib",
 				);
 				MACH_O_TYPE = mh_execute;
+				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};

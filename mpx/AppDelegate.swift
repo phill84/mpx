@@ -26,7 +26,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
 	func applicationDidFinishLaunching(notification: NSNotification) {
-
+		// set up default logger
+		#if DEBUG
+			logger.setup(logLevel: .Debug, showThreadName: true, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil)
+			#else
+			logger.setup(logLevel: .Severe, showThreadName: true, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil)
+		#endif
+		
         // change appearance to vibrant dark
         let playerWindow = NSApplication.sharedApplication().windows[0] as! PlayerWindow
         playerWindow.appearance = NSAppearance(named: NSAppearanceNameVibrantDark)
