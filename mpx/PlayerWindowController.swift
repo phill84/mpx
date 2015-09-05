@@ -12,15 +12,11 @@ import XCGLogger
 class PlayerWindowController: NSWindowController, NSWindowDelegate {
     
     let logger = XCGLogger.defaultInstance()
-    let idleInterval = NSTimeInterval(2) // 2 seconds
 
     weak var mpv: MpvController?
     var defaultFrame: NSRect?
     var previousFrame: NSRect?
-    var titleBarView: NSView?
-    var controlUIView: ControlUIView?
-    var idleTimer: NSTimer?
-    
+        
     // default values
     var title: String = "mpx"    
     
@@ -29,26 +25,10 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         
         window?.delegate = self
         defaultFrame = window?.frame
-
-        titleBarView = window!.standardWindowButton(NSWindowButton.CloseButton)?.superview
-        controlUIView = window!.contentView.subviews[1] as? ControlUIView
         
         center()
-        resetIdleTimer()
     }
-    
-    override func mouseEntered(event: NSEvent) {
-        showControlUI()
-    }
-    
-    override func mouseExited(event: NSEvent) {
-//        hideControlUI()
-    }
-    
-    override func mouseMoved(event: NSEvent) {
-        showControlUI()
-    }
-    
+        
     override func mouseDown(event: NSEvent) {
         // double click toggles fullscreen
         if event.clickCount == 2 && AppDelegate.getInstance().mediaFileLoaded {
@@ -60,27 +40,27 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
 		let keyCode = event.keyCode
 		
 		switch event.keyCode {
-		case 49: // space
-			logger.debug("space")
+		case KeyCode.kVK_Space.UInt16Value():
 			mpv!.togglePause()
-		case 123: // left
-			logger.debug("left")
-		case 124: // right
-			logger.debug("right arrow")
+			
+		case KeyCode.kVK_LeftArrow.UInt16Value():
+			mpv!.seekBySecond(-5)
+			
+		case KeyCode.kVK_RightArrow.UInt16Value():
+			mpv!.seekBySecond(5)
+		
+		case KeyCode.kVK_UpArrow.UInt16Value():
+			mpv!.seekBySecond(60)
+
+		case KeyCode.kVK_DownArrow.UInt16Value():
+			mpv!.seekBySecond(-60)
+
 		default:
 			logger.debug("keycode: \(event.keyCode)")
 		}
 	}
     
-    func showControlUI() {
-        if AppDelegate.getInstance().active {
-            resetIdleTimer()
-            titleBarView!.animator().alphaValue = 1
-            controlUIView!.animator().alphaValue = 1
-        }
-    }
-    
-    func hideWindow() {
+	func hideWindow() {
         dispatch_async(dispatch_get_main_queue(), {
             window?.orderOut(self)
         })
@@ -90,15 +70,6 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         dispatch_async(dispatch_get_main_queue(), {
             self.showWindow(self)
         })
-    }
-    
-    func hideControlUI() {
-        // invalidate idleTimer since controlUI will be hidden already
-        idleTimer?.invalidate()
-        if !AppDelegate.getInstance().fullscreen {
-            titleBarView!.animator().alphaValue = 0
-        }
-        controlUIView!.animator().alphaValue = 0
     }
     
     func resize(#width: CGFloat, height: CGFloat) {
@@ -217,12 +188,6 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     
     func windowWillClose(notification: NSNotification) {
         NSApplication.sharedApplication().stop(self)
-    }
-    
-    func resetIdleTimer() {
-        self.idleTimer?.invalidate()
-        self.idleTimer = NSTimer(timeInterval: self.idleInterval, target: self, selector: Selector("hideControlUI"), userInfo: nil, repeats: true)
-        NSRunLoop.mainRunLoop().addTimer(self.idleTimer!, forMode: NSDefaultRunLoopMode)
     }
     
     func updateTitle(title: String) {

@@ -10,7 +10,7 @@
 #import "swiftbridge.h"
 
 NSDictionary* get_mpv_node_list_as_dict(mpv_node node) {
-	if (node.format != MPV_FORMAT_NODE_ARRAY && node.format != MPV_FORMAT_NODE_MAP) {
+	if (node.format != MPV_FORMAT_NODE_MAP) {
 		return nil;
 	}
 	
@@ -65,4 +65,45 @@ NSDictionary* get_mpv_node_list_as_dict(mpv_node node) {
 	}
 	
 	return dict;
+}
+
+void mpv_cmd_node_async(mpv_handle *context, NSArray *values, mpv_format *mpv_formats) {
+	mpv_node items[values.count];
+	mpv_node_list list = {.values = items};
+	mpv_node node = {
+		.format = MPV_FORMAT_NODE_ARRAY,
+		.u = {
+			.list = &list
+		}
+	};
+	
+	for (int i=0; i<[values count]; i++) {
+		switch (mpv_formats[i]) {
+			case MPV_FORMAT_STRING: {
+				const char* utf8String = [(NSString *)[values objectAtIndex: i] UTF8String];
+
+				size_t len = strlen(utf8String) + 1;
+				char *string = malloc(len);
+				memcpy(string, utf8String, len);
+				
+				items[list.num++] = (mpv_node) {
+					.format = MPV_FORMAT_STRING,
+					.u = {.string = string}
+				};
+				break;
+			}
+			case MPV_FORMAT_INT64: {
+				int64_t value = [(NSNumber *)[values objectAtIndex: i] intValue];
+				items[list.num++] = (mpv_node) {
+					.format = MPV_FORMAT_INT64,
+					.u = {.int64 = value}
+				};
+				break;
+			}
+			default:
+				break;
+		}
+	};
+	
+	mpv_command_node_async(context, 0, &node);
 }

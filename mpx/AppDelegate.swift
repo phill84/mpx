@@ -29,7 +29,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		// set up default logger
 		#if DEBUG
 			logger.setup(logLevel: .Debug, showThreadName: true, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil)
-			#else
+		#else
 			logger.setup(logLevel: .Severe, showThreadName: true, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil)
 		#endif
 		

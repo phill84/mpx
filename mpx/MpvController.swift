@@ -20,6 +20,7 @@ class MpvController: NSObject {
     var videoOriginalSize: NSSize?
     
     var state: PlayerState = .Uninitialized
+	var playlist = 0
 	
 	override init() {
         playerWindowController = NSApplication.sharedApplication().windows[0].windowController() as! PlayerWindowController
@@ -35,17 +36,21 @@ class MpvController: NSObject {
 		}
 		logger.debug("mpv context created: \(context!.debugDescription)")
 		
-		checkError(mpv_initialize(context!))
-		checkError(mpv_request_log_messages(context!, "warn"))
+		checkError(mpv_initialize(context!), message: "mpv_initialize")
+		#if DEBUG
+			checkError(mpv_request_log_messages(context!, "info"), message: "mpv_request_log_messages")
+		#else
+			checkError(mpv_request_log_messages(context!, "warn"), message: "mpv_request_log_messages")
+		#endif
 		
 		mpvQueue = dispatch_queue_create("mpv", DISPATCH_QUEUE_SERIAL)
 		
         // set default options
         var videoView: AnyObject? = playerWindowController.window?.contentView.subviews[0]
-        checkError(mpv_set_option(context!, "wid", MPV_FORMAT_INT64, &videoView))
-        checkError(mpv_set_option_string(context!, "audio-client-name", "mpx"))
-        checkError(mpv_set_option_string(context!, "hwdec", "auto"))
-        checkError(mpv_set_option_string(context!, "hwdec-codecs", "all"))
+		checkError(mpv_set_option(context!, "wid", MPV_FORMAT_INT64, &videoView), message: "mpv_set_option: wid")
+		checkError(mpv_set_option_string(context!, "audio-client-name", "mpx"), message: "mpv_set_option_string: audio-client-name")
+        checkError(mpv_set_option_string(context!, "hwdec", "auto"), message: "mpv_set_option_string: hwdec")
+        checkError(mpv_set_option_string(context!, "hwdec-codecs", "all"), message: "mpv_set_option_string: hwdec-codecs")
 
         
 		// register callbacks
@@ -63,10 +68,10 @@ class MpvController: NSObject {
 		return callback
 	}
 	
-	func checkError(status: Int32) {
+	func checkError(status: Int32, message: String) {
 		if (status < 0) {
             let error = String.fromCString(mpv_error_string(status))!
-			logger.error("mpv API error: \(error)")
+			logger.error("mpv API error: \(error), \(message)")
             playerWindowController.alertAndExit(error)
 		}
 	}
@@ -100,10 +105,11 @@ class MpvController: NSObject {
 			var text = String.fromCString(msg.text)!
             text = text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
             if !text.isEmpty {
-                logger.debug("[\(prefix)] \(level): \(text)")
+                NSLog("[\(prefix)] \(level): \(text)")
             }
 			
 		case MPV_EVENT_FILE_LOADED.value:
+			logger.debug("file loaded")
             state = .FileLoaded
             
             // get video size and resize if necessary
@@ -123,8 +129,8 @@ class MpvController: NSObject {
             }
 
         case MPV_EVENT_PLAYBACK_RESTART.value:
-            state = .Playing
-            logger.debug("playback started")
+			state = isPaused() ? .Paused : .Playing
+            logger.debug("playback restarted")
 
 		case MPV_EVENT_PAUSE.value:
 			state = .Paused
@@ -133,13 +139,24 @@ class MpvController: NSObject {
 		case MPV_EVENT_UNPAUSE.value:
 			state = .Playing
 			logger.debug("playback unpaused")
+		
+		case MPV_EVENT_END_FILE.value:
+			playlist--
+			let data = UnsafeMutablePointer<mpv_event_end_file>(event.data).memory
+			switch UInt32(data.reason) {
+			case MPV_END_FILE_REASON_ERROR.value:
+				let error = String.fromCString(mpv_error_string(data.error))!
+				logger.error("end file: \(error)")
+			default:
+				logger.debug("end file: \(data.reason)")
+			}
+			if playlist == 0 {
+				NSApplication.sharedApplication().stop(self)
+			}
 			
 		default:
 			let eventName = String.fromCString(mpv_event_name(event.event_id))!
-			logger.debug("event name: \(eventName)")
-            if event.data != nil {
-                logger.debug("event data: \(event.data)")
-            }
+			logger.debug("event name: \(eventName), error: \(event.error), data: \(event.data), reply userdata: \(event.reply_userdata)")
 		}
 	}
 	
@@ -176,8 +193,19 @@ class MpvController: NSObject {
 				(url.path! as NSString).UTF8String,
 				nil
 			]
+			self.playlist++
 			mpv_command(self.context!, &cmd)
 		})
+	}
+	
+	func isPaused() -> Bool {
+		var flag: Int?
+		mpv_get_property(context!, "pause", MPV_FORMAT_FLAG, &flag)
+		
+		if (flag == nil) {
+			return false
+		}
+		return flag == 1
 	}
 	
 	func togglePause() {
@@ -188,6 +216,19 @@ class MpvController: NSObject {
 		} else if state == .Paused {
 			pause = 0
 		}
-		mpv_set_property(context!, "pause", MPV_FORMAT_FLAG, &pause);
+		mpv_set_property_async(context!, 0, "pause", MPV_FORMAT_FLAG, &pause);
+	}
+	
+	func seekBySecond(seconds: Int) {
+		let values: [AnyObject] = [
+			"seek",
+			seconds
+		]
+		var mpv_formats: [mpv_format] = [
+			MPV_FORMAT_STRING,
+			MPV_FORMAT_INT64
+		]
+		
+		mpv_cmd_node_async(context!, values, &mpv_formats)
 	}
 }

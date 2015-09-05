@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		470A521C1B7A7F0900200D17 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470A521B1B7A7F0900200D17 /* VideoView.swift */; };
+		4741D9921B99CD43001A1D6F /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4741D9911B99CD43001A1D6F /* PlayerViewController.swift */; };
+		4741D9941B9B3F38001A1D6F /* KeyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4741D9931B9B3F38001A1D6F /* KeyCode.swift */; };
 		47AD85651B6CF6F700B5A3C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AD85641B6CF6F700B5A3C1 /* AppDelegate.swift */; };
 		47AD85691B6CF6F700B5A3C1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47AD85681B6CF6F700B5A3C1 /* Images.xcassets */; };
 		47AD856C1B6CF6F700B5A3C1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47AD856A1B6CF6F700B5A3C1 /* Main.storyboard */; };
@@ -139,6 +141,8 @@
 
 /* Begin PBXFileReference section */
 		470A521B1B7A7F0900200D17 /* VideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoView.swift; path = mpx/VideoView.swift; sourceTree = "<group>"; };
+		4741D9911B99CD43001A1D6F /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
+		4741D9931B9B3F38001A1D6F /* KeyCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyCode.swift; sourceTree = "<group>"; };
 		47AD855F1B6CF6F700B5A3C1 /* mpx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mpx.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47AD85631B6CF6F700B5A3C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		47AD85641B6CF6F700B5A3C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -237,6 +241,8 @@
 				47AD85C91B6E0A3300B5A3C1 /* controller */,
 				47AD85C41B6E08F800B5A3C1 /* view */,
 				47AD85641B6CF6F700B5A3C1 /* AppDelegate.swift */,
+				4741D9931B9B3F38001A1D6F /* KeyCode.swift */,
+				47EAAC521B8BBE3400EC1461 /* PlayerState.swift */,
 				47AD85681B6CF6F700B5A3C1 /* Images.xcassets */,
 				47AD856A1B6CF6F700B5A3C1 /* Main.storyboard */,
 				47AD85621B6CF6F700B5A3C1 /* Supporting Files */,
@@ -297,7 +303,7 @@
 			children = (
 				47AD85971B6D51E900B5A3C1 /* MpvController.swift */,
 				47AD85CF1B768FC100B5A3C1 /* PlayerWindowController.swift */,
-				47EAAC521B8BBE3400EC1461 /* PlayerState.swift */,
+				4741D9911B99CD43001A1D6F /* PlayerViewController.swift */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -498,12 +504,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4741D9921B99CD43001A1D6F /* PlayerViewController.swift in Sources */,
 				47C5CEB51B87D1F700BE6554 /* ControlUIView.swift in Sources */,
 				47EAAC531B8BBE3400EC1461 /* PlayerState.swift in Sources */,
 				47C5CEB31B87C54900BE6554 /* ControlView.swift in Sources */,
 				470A521C1B7A7F0900200D17 /* VideoView.swift in Sources */,
 				47C5CEB11B86781600BE6554 /* PlayerWindow.swift in Sources */,
 				47AD85D01B768FC100B5A3C1 /* PlayerWindowController.swift in Sources */,
+				4741D9941B9B3F38001A1D6F /* KeyCode.swift in Sources */,
 				47AD85CE1B6EA6A800B5A3C1 /* swiftbridge.m in Sources */,
 				47AD85981B6D51E900B5A3C1 /* MpvController.swift in Sources */,
 				47AD85651B6CF6F700B5A3C1 /* AppDelegate.swift in Sources */,

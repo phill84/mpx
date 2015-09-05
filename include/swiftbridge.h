@@ -15,4 +15,6 @@
 // helper functions
 NSDictionary* get_mpv_node_list_as_dict(mpv_node node);
 
+void mpv_cmd_node_async(mpv_handle *context, NSArray *values, mpv_format *mpv_formats);
+
 #endif
