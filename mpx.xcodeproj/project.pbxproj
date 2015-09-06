@@ -51,7 +51,6 @@
 		47AD85CF1B768FC100B5A3C1 /* PlayerWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerWindowController.swift; sourceTree = "<group>"; };
 		47AD85E71B77ADCB00B5A3C1 /* client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = client.h; sourceTree = "<group>"; };
 		47AD85E91B77ADCB00B5A3C1 /* swiftbridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = swiftbridge.h; sourceTree = "<group>"; };
-		47AD86211B77DAF000B5A3C1 /* patch_libmpv.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = patch_libmpv.py; sourceTree = "<group>"; };
 		47C5CEB01B86781600BE6554 /* PlayerWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerWindow.swift; path = mpx/PlayerWindow.swift; sourceTree = "<group>"; };
 		47C5CEB21B87C54900BE6554 /* ControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ControlView.swift; path = mpx/ControlView.swift; sourceTree = "<group>"; };
 		47C5CEB41B87D1F700BE6554 /* ControlUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ControlUIView.swift; path = mpx/ControlUIView.swift; sourceTree = "<group>"; };
@@ -95,7 +94,6 @@
 		47AD85561B6CF6F700B5A3C1 = {
 			isa = PBXGroup;
 			children = (
-				47AD86211B77DAF000B5A3C1 /* patch_libmpv.py */,
 				47AD85CD1B6EA6A800B5A3C1 /* swiftbridge.m */,
 				47AD85E61B77ADCB00B5A3C1 /* include */,
 				47AD85DF1B77AC8D00B5A3C1 /* lib */,

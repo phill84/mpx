@@ -1,6 +1,6 @@
 language: objective-c
 osx_image: xcode6.4
-xcode_project: mpx.xcodeproj
+xcode_workspace: mpx.xcworkspace
 xcode_scheme: mpx
 before_install:
 - brew update || brew update
