@@ -4,7 +4,6 @@ xcode_project: mpx.xcodeproj
 xcode_scheme: mpx
 before_install:
 - brew update || brew update
-- brew outdated xctool || brew upgrade xctool
-before_script:
-- git clone https://github.com/DaveWoodCom/XCGLogger.git ../XCGLogger
-- git -C ../XCGLogger checkout tags/Version_2.2
+- brew upgrade
+install:
+- install_deps.sh

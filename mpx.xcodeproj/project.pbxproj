@@ -14,43 +14,15 @@
 		47AD85691B6CF6F700B5A3C1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47AD85681B6CF6F700B5A3C1 /* Images.xcassets */; };
 		47AD856C1B6CF6F700B5A3C1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47AD856A1B6CF6F700B5A3C1 /* Main.storyboard */; };
 		47AD85981B6D51E900B5A3C1 /* MpvController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AD85971B6D51E900B5A3C1 /* MpvController.swift */; };
-		47AD85C01B6D5FE300B5A3C1 /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD85B81B6D5F2900B5A3C1 /* XCGLogger.framework */; };
-		47AD85C11B6D5FE300B5A3C1 /* XCGLogger.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD85B81B6D5F2900B5A3C1 /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		47AD85CE1B6EA6A800B5A3C1 /* swiftbridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 47AD85CD1B6EA6A800B5A3C1 /* swiftbridge.m */; };
 		47AD85D01B768FC100B5A3C1 /* PlayerWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AD85CF1B768FC100B5A3C1 /* PlayerWindowController.swift */; };
-		47AD86251B77E11300B5A3C1 /* libmpv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD85E01B77AD2900B5A3C1 /* libmpv.dylib */; };
-		47AD86261B77E12800B5A3C1 /* libavcodec.56.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD85ED1B77DAD200B5A3C1 /* libavcodec.56.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		47AD86271B77E12800B5A3C1 /* libavdevice.56.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD85EE1B77DAD200B5A3C1 /* libavdevice.56.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		47AD86281B77E12800B5A3C1 /* libavfilter.5.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD85EF1B77DAD200B5A3C1 /* libavfilter.5.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		47AD86291B77E12800B5A3C1 /* libavresample.2.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD85F01B77DAD200B5A3C1 /* libavresample.2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		47AD862A1B77E12800B5A3C1 /* libavutil.54.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD85F11B77DAD200B5A3C1 /* libavutil.54.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		47AD862B1B77E12800B5A3C1 /* libbluray.1.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD85F21B77DAD200B5A3C1 /* libbluray.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		47AD862C1B77E12800B5A3C1 /* libjpeg.8.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD85F31B77DAD200B5A3C1 /* libjpeg.8.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		47AD862D1B77E12800B5A3C1 /* liblua.5.2.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD85F41B77DAD200B5A3C1 /* liblua.5.2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		47AD862E1B77E12800B5A3C1 /* libpostproc.53.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD85F51B77DAD200B5A3C1 /* libpostproc.53.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		47AD862F1B77E12800B5A3C1 /* libswresample.1.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD85F61B77DAD200B5A3C1 /* libswresample.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		47AD86301B77E12900B5A3C1 /* libswscale.3.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD85F71B77DAD200B5A3C1 /* libswscale.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		47AD86311B77E12900B5A3C1 /* libass.5.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD85F81B77DAD200B5A3C1 /* libass.5.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		47AD86321B77E12900B5A3C1 /* libavformat.56.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD85F91B77DAD200B5A3C1 /* libavformat.56.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		47AD86331B77E12900B5A3C1 /* libdvdcss.2.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD85FA1B77DAD200B5A3C1 /* libdvdcss.2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		47AD86341B77E12900B5A3C1 /* libdvdnav.4.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD85FB1B77DAD200B5A3C1 /* libdvdnav.4.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		47AD86351B77E12900B5A3C1 /* libdvdread.4.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD85FC1B77DAD200B5A3C1 /* libdvdread.4.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		47AD86361B77E12900B5A3C1 /* libfontconfig.1.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD85FD1B77DAD200B5A3C1 /* libfontconfig.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		47AD86371B77E12900B5A3C1 /* libfreetype.6.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD85FE1B77DAD200B5A3C1 /* libfreetype.6.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		47AD86381B77E12900B5A3C1 /* libfribidi.0.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD85FF1B77DAD200B5A3C1 /* libfribidi.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		47AD86391B77E12900B5A3C1 /* libguess.1.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD86001B77DAD200B5A3C1 /* libguess.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		47AD863A1B77E12900B5A3C1 /* liblcms2.2.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD86011B77DAD200B5A3C1 /* liblcms2.2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		47AD863B1B77E12900B5A3C1 /* liblzma.5.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD86021B77DAD200B5A3C1 /* liblzma.5.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		47AD863C1B77E12900B5A3C1 /* libmp3lame.0.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD86031B77DAD200B5A3C1 /* libmp3lame.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		47AD863D1B77E12900B5A3C1 /* libpng16.16.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD86041B77DAD200B5A3C1 /* libpng16.16.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		47AD863E1B77E12900B5A3C1 /* libvo-aacenc.0.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD86051B77DAD200B5A3C1 /* libvo-aacenc.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		47AD863F1B77E12900B5A3C1 /* libx264.144.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD86061B77DAD200B5A3C1 /* libx264.144.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		47AD86401B77E12900B5A3C1 /* libmpv.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 47AD85E01B77AD2900B5A3C1 /* libmpv.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		47C5CEB11B86781600BE6554 /* PlayerWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C5CEB01B86781600BE6554 /* PlayerWindow.swift */; };
 		47C5CEB31B87C54900BE6554 /* ControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C5CEB21B87C54900BE6554 /* ControlView.swift */; };
 		47C5CEB51B87D1F700BE6554 /* ControlUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C5CEB41B87D1F700BE6554 /* ControlUIView.swift */; };
 		47EAAC531B8BBE3400EC1461 /* PlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EAAC521B8BBE3400EC1461 /* PlayerState.swift */; };
 		47EAAC551B8D095100EC1461 /* mpxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EAAC541B8D095100EC1461 /* mpxTests.swift */; };
+		47EFA25B1B9C7743001AE5B4 /* libmpv.1.19.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 47EFA25A1B9C7743001AE5B4 /* libmpv.1.19.0.dylib */; };
+		6F14AEF93B2728214C1926D0 /* Pods_mpx.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC91C244E08987EE3FEE9C96 /* Pods_mpx.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,83 +33,7 @@
 			remoteGlobalIDString = 47AD855E1B6CF6F700B5A3C1;
 			remoteInfo = mpx;
 		};
-		47AD85B51B6D5F2900B5A3C1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 47AD85AF1B6D5F2900B5A3C1 /* XCGLogger.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 55E3EE4519D76F280068C3A7;
-			remoteInfo = "XCGLogger (iOS)";
-		};
-		47AD85B71B6D5F2900B5A3C1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 47AD85AF1B6D5F2900B5A3C1 /* XCGLogger.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 554DF41719D76FE7005708BE;
-			remoteInfo = "XCGLogger (OS X)";
-		};
-		47AD85B91B6D5F2900B5A3C1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 47AD85AF1B6D5F2900B5A3C1 /* XCGLogger.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 55E3EE5019D76F280068C3A7;
-			remoteInfo = XCGLoggerTests;
-		};
-		47AD85C21B6D5FE300B5A3C1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 47AD85AF1B6D5F2900B5A3C1 /* XCGLogger.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 554DF41619D76FE7005708BE;
-			remoteInfo = "XCGLogger (OS X)";
-		};
-		47EAAC501B8B95F700EC1461 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 47AD85AF1B6D5F2900B5A3C1 /* XCGLogger.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 55BB1F011B79DC7500709779;
-			remoteInfo = "XCGLoggerTests (OS X)";
-		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		47AD858A1B6D1F3300B5A3C1 /* Copy Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				47AD86261B77E12800B5A3C1 /* libavcodec.56.dylib in Copy Frameworks */,
-				47AD86271B77E12800B5A3C1 /* libavdevice.56.dylib in Copy Frameworks */,
-				47AD86281B77E12800B5A3C1 /* libavfilter.5.dylib in Copy Frameworks */,
-				47AD86291B77E12800B5A3C1 /* libavresample.2.dylib in Copy Frameworks */,
-				47AD862A1B77E12800B5A3C1 /* libavutil.54.dylib in Copy Frameworks */,
-				47AD862B1B77E12800B5A3C1 /* libbluray.1.dylib in Copy Frameworks */,
-				47AD862C1B77E12800B5A3C1 /* libjpeg.8.dylib in Copy Frameworks */,
-				47AD862D1B77E12800B5A3C1 /* liblua.5.2.dylib in Copy Frameworks */,
-				47AD862E1B77E12800B5A3C1 /* libpostproc.53.dylib in Copy Frameworks */,
-				47AD862F1B77E12800B5A3C1 /* libswresample.1.dylib in Copy Frameworks */,
-				47AD86301B77E12900B5A3C1 /* libswscale.3.dylib in Copy Frameworks */,
-				47AD86311B77E12900B5A3C1 /* libass.5.dylib in Copy Frameworks */,
-				47AD86321B77E12900B5A3C1 /* libavformat.56.dylib in Copy Frameworks */,
-				47AD86331B77E12900B5A3C1 /* libdvdcss.2.dylib in Copy Frameworks */,
-				47AD86341B77E12900B5A3C1 /* libdvdnav.4.dylib in Copy Frameworks */,
-				47AD86351B77E12900B5A3C1 /* libdvdread.4.dylib in Copy Frameworks */,
-				47AD86361B77E12900B5A3C1 /* libfontconfig.1.dylib in Copy Frameworks */,
-				47AD86371B77E12900B5A3C1 /* libfreetype.6.dylib in Copy Frameworks */,
-				47AD86381B77E12900B5A3C1 /* libfribidi.0.dylib in Copy Frameworks */,
-				47AD86391B77E12900B5A3C1 /* libguess.1.dylib in Copy Frameworks */,
-				47AD863A1B77E12900B5A3C1 /* liblcms2.2.dylib in Copy Frameworks */,
-				47AD863B1B77E12900B5A3C1 /* liblzma.5.dylib in Copy Frameworks */,
-				47AD863C1B77E12900B5A3C1 /* libmp3lame.0.dylib in Copy Frameworks */,
-				47AD863D1B77E12900B5A3C1 /* libpng16.16.dylib in Copy Frameworks */,
-				47AD863E1B77E12900B5A3C1 /* libvo-aacenc.0.dylib in Copy Frameworks */,
-				47AD863F1B77E12900B5A3C1 /* libx264.144.dylib in Copy Frameworks */,
-				47AD86401B77E12900B5A3C1 /* libmpv.dylib in Copy Frameworks */,
-				47AD85C11B6D5FE300B5A3C1 /* XCGLogger.framework in Copy Frameworks */,
-			);
-			name = "Copy Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		470A521B1B7A7F0900200D17 /* VideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoView.swift; path = mpx/VideoView.swift; sourceTree = "<group>"; };
@@ -151,44 +47,20 @@
 		47AD85711B6CF6F700B5A3C1 /* mpxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mpxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		47AD85761B6CF6F700B5A3C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		47AD85971B6D51E900B5A3C1 /* MpvController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MpvController.swift; sourceTree = "<group>"; };
-		47AD85AF1B6D5F2900B5A3C1 /* XCGLogger.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XCGLogger.xcodeproj; path = ../XCGLogger/XCGLogger/Library/XCGLogger.xcodeproj; sourceTree = "<group>"; };
 		47AD85CD1B6EA6A800B5A3C1 /* swiftbridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = swiftbridge.m; sourceTree = "<group>"; };
 		47AD85CF1B768FC100B5A3C1 /* PlayerWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerWindowController.swift; sourceTree = "<group>"; };
-		47AD85E01B77AD2900B5A3C1 /* libmpv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmpv.dylib; sourceTree = "<group>"; };
 		47AD85E71B77ADCB00B5A3C1 /* client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = client.h; sourceTree = "<group>"; };
 		47AD85E91B77ADCB00B5A3C1 /* swiftbridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = swiftbridge.h; sourceTree = "<group>"; };
-		47AD85ED1B77DAD200B5A3C1 /* libavcodec.56.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libavcodec.56.dylib; sourceTree = "<group>"; };
-		47AD85EE1B77DAD200B5A3C1 /* libavdevice.56.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libavdevice.56.dylib; sourceTree = "<group>"; };
-		47AD85EF1B77DAD200B5A3C1 /* libavfilter.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libavfilter.5.dylib; sourceTree = "<group>"; };
-		47AD85F01B77DAD200B5A3C1 /* libavresample.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libavresample.2.dylib; sourceTree = "<group>"; };
-		47AD85F11B77DAD200B5A3C1 /* libavutil.54.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libavutil.54.dylib; sourceTree = "<group>"; };
-		47AD85F21B77DAD200B5A3C1 /* libbluray.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libbluray.1.dylib; sourceTree = "<group>"; };
-		47AD85F31B77DAD200B5A3C1 /* libjpeg.8.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libjpeg.8.dylib; sourceTree = "<group>"; };
-		47AD85F41B77DAD200B5A3C1 /* liblua.5.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = liblua.5.2.dylib; sourceTree = "<group>"; };
-		47AD85F51B77DAD200B5A3C1 /* libpostproc.53.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libpostproc.53.dylib; sourceTree = "<group>"; };
-		47AD85F61B77DAD200B5A3C1 /* libswresample.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libswresample.1.dylib; sourceTree = "<group>"; };
-		47AD85F71B77DAD200B5A3C1 /* libswscale.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libswscale.3.dylib; sourceTree = "<group>"; };
-		47AD85F81B77DAD200B5A3C1 /* libass.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libass.5.dylib; sourceTree = "<group>"; };
-		47AD85F91B77DAD200B5A3C1 /* libavformat.56.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libavformat.56.dylib; sourceTree = "<group>"; };
-		47AD85FA1B77DAD200B5A3C1 /* libdvdcss.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libdvdcss.2.dylib; sourceTree = "<group>"; };
-		47AD85FB1B77DAD200B5A3C1 /* libdvdnav.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libdvdnav.4.dylib; sourceTree = "<group>"; };
-		47AD85FC1B77DAD200B5A3C1 /* libdvdread.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libdvdread.4.dylib; sourceTree = "<group>"; };
-		47AD85FD1B77DAD200B5A3C1 /* libfontconfig.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libfontconfig.1.dylib; sourceTree = "<group>"; };
-		47AD85FE1B77DAD200B5A3C1 /* libfreetype.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libfreetype.6.dylib; sourceTree = "<group>"; };
-		47AD85FF1B77DAD200B5A3C1 /* libfribidi.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libfribidi.0.dylib; sourceTree = "<group>"; };
-		47AD86001B77DAD200B5A3C1 /* libguess.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libguess.1.dylib; sourceTree = "<group>"; };
-		47AD86011B77DAD200B5A3C1 /* liblcms2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = liblcms2.2.dylib; sourceTree = "<group>"; };
-		47AD86021B77DAD200B5A3C1 /* liblzma.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = liblzma.5.dylib; sourceTree = "<group>"; };
-		47AD86031B77DAD200B5A3C1 /* libmp3lame.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmp3lame.0.dylib; sourceTree = "<group>"; };
-		47AD86041B77DAD200B5A3C1 /* libpng16.16.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libpng16.16.dylib; sourceTree = "<group>"; };
-		47AD86051B77DAD200B5A3C1 /* libvo-aacenc.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "libvo-aacenc.0.dylib"; sourceTree = "<group>"; };
-		47AD86061B77DAD200B5A3C1 /* libx264.144.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libx264.144.dylib; sourceTree = "<group>"; };
 		47AD86211B77DAF000B5A3C1 /* patch_libmpv.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = patch_libmpv.py; sourceTree = "<group>"; };
 		47C5CEB01B86781600BE6554 /* PlayerWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerWindow.swift; path = mpx/PlayerWindow.swift; sourceTree = "<group>"; };
 		47C5CEB21B87C54900BE6554 /* ControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ControlView.swift; path = mpx/ControlView.swift; sourceTree = "<group>"; };
 		47C5CEB41B87D1F700BE6554 /* ControlUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ControlUIView.swift; path = mpx/ControlUIView.swift; sourceTree = "<group>"; };
 		47EAAC521B8BBE3400EC1461 /* PlayerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerState.swift; sourceTree = "<group>"; };
 		47EAAC541B8D095100EC1461 /* mpxTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mpxTests.swift; sourceTree = "<group>"; };
+		47EFA25A1B9C7743001AE5B4 /* libmpv.1.19.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmpv.1.19.0.dylib; sourceTree = "<group>"; };
+		937C74BFC03A022A479B49F1 /* Pods-mpx.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mpx.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mpx/Pods-mpx.debug.xcconfig"; sourceTree = "<group>"; };
+		CC91C244E08987EE3FEE9C96 /* Pods_mpx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mpx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECAF707CAD6A950CA12731C5 /* Pods-mpx.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mpx.release.xcconfig"; path = "Pods/Target Support Files/Pods-mpx/Pods-mpx.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,8 +68,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				47AD86251B77E11300B5A3C1 /* libmpv.dylib in Frameworks */,
-				47AD85C01B6D5FE300B5A3C1 /* XCGLogger.framework in Frameworks */,
+				47EFA25B1B9C7743001AE5B4 /* libmpv.1.19.0.dylib in Frameworks */,
+				6F14AEF93B2728214C1926D0 /* Pods_mpx.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,11 +83,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0DCFFEE3059936F629EDF283 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				937C74BFC03A022A479B49F1 /* Pods-mpx.debug.xcconfig */,
+				ECAF707CAD6A950CA12731C5 /* Pods-mpx.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		47AD85561B6CF6F700B5A3C1 = {
 			isa = PBXGroup;
 			children = (
 				47AD86211B77DAF000B5A3C1 /* patch_libmpv.py */,
-				47AD85AF1B6D5F2900B5A3C1 /* XCGLogger.xcodeproj */,
 				47AD85CD1B6EA6A800B5A3C1 /* swiftbridge.m */,
 				47AD85E61B77ADCB00B5A3C1 /* include */,
 				47AD85DF1B77AC8D00B5A3C1 /* lib */,
@@ -223,6 +103,8 @@
 				47AD85611B6CF6F700B5A3C1 /* mpx */,
 				47AD85741B6CF6F700B5A3C1 /* mpxTests */,
 				47AD85601B6CF6F700B5A3C1 /* Products */,
+				0DCFFEE3059936F629EDF283 /* Pods */,
+				E85519FBD8E72CCA72A56A3C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -275,17 +157,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		47AD85B01B6D5F2900B5A3C1 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				47AD85B61B6D5F2900B5A3C1 /* XCGLogger.framework */,
-				47AD85B81B6D5F2900B5A3C1 /* XCGLogger.framework */,
-				47AD85BA1B6D5F2900B5A3C1 /* XCGLoggerTests (iOS).xctest */,
-				47EAAC511B8B95F700EC1461 /* XCGLoggerTests (OS X).xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		47AD85C41B6E08F800B5A3C1 /* view */ = {
 			isa = PBXGroup;
 			children = (
@@ -311,33 +182,7 @@
 		47AD85DF1B77AC8D00B5A3C1 /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				47AD85ED1B77DAD200B5A3C1 /* libavcodec.56.dylib */,
-				47AD85EE1B77DAD200B5A3C1 /* libavdevice.56.dylib */,
-				47AD85EF1B77DAD200B5A3C1 /* libavfilter.5.dylib */,
-				47AD85F01B77DAD200B5A3C1 /* libavresample.2.dylib */,
-				47AD85F11B77DAD200B5A3C1 /* libavutil.54.dylib */,
-				47AD85F21B77DAD200B5A3C1 /* libbluray.1.dylib */,
-				47AD85F31B77DAD200B5A3C1 /* libjpeg.8.dylib */,
-				47AD85F41B77DAD200B5A3C1 /* liblua.5.2.dylib */,
-				47AD85F51B77DAD200B5A3C1 /* libpostproc.53.dylib */,
-				47AD85F61B77DAD200B5A3C1 /* libswresample.1.dylib */,
-				47AD85F71B77DAD200B5A3C1 /* libswscale.3.dylib */,
-				47AD85F81B77DAD200B5A3C1 /* libass.5.dylib */,
-				47AD85F91B77DAD200B5A3C1 /* libavformat.56.dylib */,
-				47AD85FA1B77DAD200B5A3C1 /* libdvdcss.2.dylib */,
-				47AD85FB1B77DAD200B5A3C1 /* libdvdnav.4.dylib */,
-				47AD85FC1B77DAD200B5A3C1 /* libdvdread.4.dylib */,
-				47AD85FD1B77DAD200B5A3C1 /* libfontconfig.1.dylib */,
-				47AD85FE1B77DAD200B5A3C1 /* libfreetype.6.dylib */,
-				47AD85FF1B77DAD200B5A3C1 /* libfribidi.0.dylib */,
-				47AD86001B77DAD200B5A3C1 /* libguess.1.dylib */,
-				47AD86011B77DAD200B5A3C1 /* liblcms2.2.dylib */,
-				47AD86021B77DAD200B5A3C1 /* liblzma.5.dylib */,
-				47AD86031B77DAD200B5A3C1 /* libmp3lame.0.dylib */,
-				47AD86041B77DAD200B5A3C1 /* libpng16.16.dylib */,
-				47AD86051B77DAD200B5A3C1 /* libvo-aacenc.0.dylib */,
-				47AD86061B77DAD200B5A3C1 /* libx264.144.dylib */,
-				47AD85E01B77AD2900B5A3C1 /* libmpv.dylib */,
+				47EFA25A1B9C7743001AE5B4 /* libmpv.1.19.0.dylib */,
 			);
 			path = lib;
 			sourceTree = "<group>";
@@ -366,6 +211,14 @@
 			path = fonts;
 			sourceTree = "<group>";
 		};
+		E85519FBD8E72CCA72A56A3C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CC91C244E08987EE3FEE9C96 /* Pods_mpx.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -373,15 +226,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 47AD857B1B6CF6F700B5A3C1 /* Build configuration list for PBXNativeTarget "mpx" */;
 			buildPhases = (
+				D0D67C15A1BCDCD7D283D434 /* Check Pods Manifest.lock */,
 				47AD855B1B6CF6F700B5A3C1 /* Sources */,
 				47AD855C1B6CF6F700B5A3C1 /* Frameworks */,
 				47AD855D1B6CF6F700B5A3C1 /* Resources */,
-				47AD858A1B6D1F3300B5A3C1 /* Copy Frameworks */,
+				47EFA2561B9C5689001AE5B4 /* Copy Dependencies */,
+				5E313414F0AF578E6DEB2B9F /* Embed Pods Frameworks */,
+				73CD8E087EDD7464AB9883CA /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				47AD85C31B6D5FE300B5A3C1 /* PBXTargetDependency */,
 			);
 			name = mpx;
 			productName = mpx;
@@ -435,12 +290,6 @@
 			mainGroup = 47AD85561B6CF6F700B5A3C1;
 			productRefGroup = 47AD85601B6CF6F700B5A3C1 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 47AD85B01B6D5F2900B5A3C1 /* Products */;
-					ProjectRef = 47AD85AF1B6D5F2900B5A3C1 /* XCGLogger.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				47AD855E1B6CF6F700B5A3C1 /* mpx */,
@@ -448,37 +297,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		47AD85B61B6D5F2900B5A3C1 /* XCGLogger.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = XCGLogger.framework;
-			remoteRef = 47AD85B51B6D5F2900B5A3C1 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		47AD85B81B6D5F2900B5A3C1 /* XCGLogger.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = XCGLogger.framework;
-			remoteRef = 47AD85B71B6D5F2900B5A3C1 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		47AD85BA1B6D5F2900B5A3C1 /* XCGLoggerTests (iOS).xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "XCGLoggerTests (iOS).xctest";
-			remoteRef = 47AD85B91B6D5F2900B5A3C1 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		47EAAC511B8B95F700EC1461 /* XCGLoggerTests (OS X).xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "XCGLoggerTests (OS X).xctest";
-			remoteRef = 47EAAC501B8B95F700EC1461 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		47AD855D1B6CF6F700B5A3C1 /* Resources */ = {
@@ -498,6 +316,69 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		47EFA2561B9C5689001AE5B4 /* Copy Dependencies */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Dependencies";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${SRCROOT}/bundle_libmpv_deps.sh";
+			showEnvVarsInLog = 0;
+		};
+		5E313414F0AF578E6DEB2B9F /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mpx/Pods-mpx-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		73CD8E087EDD7464AB9883CA /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mpx/Pods-mpx-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D0D67C15A1BCDCD7D283D434 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		47AD855B1B6CF6F700B5A3C1 /* Sources */ = {
@@ -533,11 +414,6 @@
 			isa = PBXTargetDependency;
 			target = 47AD855E1B6CF6F700B5A3C1 /* mpx */;
 			targetProxy = 47AD85721B6CF6F700B5A3C1 /* PBXContainerItemProxy */;
-		};
-		47AD85C31B6D5FE300B5A3C1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "XCGLogger (OS X)";
-			targetProxy = 47AD85C21B6D5FE300B5A3C1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -639,6 +515,7 @@
 		};
 		47AD857C1B6CF6F700B5A3C1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 937C74BFC03A022A479B49F1 /* Pods-mpx.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -651,7 +528,7 @@
 					"$(PROJECT_DIR)/lib",
 				);
 				MACH_O_TYPE = mh_execute;
-				OTHER_SWIFT_FLAGS = "-DDEBUG";
+				OTHER_SWIFT_FLAGS = "$(inherited) -DDEBUG";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -659,6 +536,7 @@
 		};
 		47AD857D1B6CF6F700B5A3C1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ECAF707CAD6A950CA12731C5 /* Pods-mpx.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

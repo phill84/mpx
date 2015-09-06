@@ -2,3 +2,8 @@
 mpx.xcodeproj/project.xcworkspace/xcshareddata/
 mpx.xcodeproj/project.xcworkspace/xcuserdata/
 mpx.xcodeproj/xcuserdata/
+lib/
+Pods
+Podfile.lock
+mpx.xcworkspace/xcshareddata/
+mpx.xcworkspace/xcuserdata/
