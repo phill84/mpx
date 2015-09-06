@@ -7,3 +7,4 @@ before_install:
 - brew upgrade
 install:
 - $TRAVIS_BUILD_DIR/install_deps.sh
+- pod install --project-directory=$TRAVIS_BUILD_DIR

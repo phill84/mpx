@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+set -e
+
 MPV_TAG=v0.10.0
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
 
@@ -6,7 +8,7 @@ cd $SCRIPT_DIR/..
 # checkout mpv
 [[ -d mpv ]] && rm -rf mpv
 git clone https://github.com/mpv-player/mpv.git mpv
-git -C ./mpv checkout tags/$MPV_VER
+git -C ./mpv checkout tags/$MPV_TAG
 
 # (re)install mpv deps
 brew install --HEAD ffmpeg
