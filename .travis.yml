@@ -6,4 +6,4 @@ before_install:
 - brew update || brew update
 - brew upgrade
 install:
-- install_deps.sh
+- $TRAVIS_BUILD_DIR/phill84/mpx/install_deps.sh
