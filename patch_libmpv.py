@@ -68,4 +68,4 @@ libmpv='lib/libmpv.dylib'
 if not os.path.isfile(libmpv):
 	sys.exit('cannot find %s' % libmpv)
 
-patch_lib("lib/libmpv.dylib", 0)
+patch_lib(libmpv, 0)

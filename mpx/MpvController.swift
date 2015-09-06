@@ -221,10 +221,12 @@ class MpvController: NSObject {
 	
 	func seekBySecond(seconds: Int) {
 		let values: [AnyObject] = [
+			"osd-msg",
 			"seek",
 			seconds
 		]
 		var mpv_formats: [mpv_format] = [
+			MPV_FORMAT_STRING,
 			MPV_FORMAT_STRING,
 			MPV_FORMAT_INT64
 		]

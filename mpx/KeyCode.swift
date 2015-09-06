@@ -1,5 +1,5 @@
 //
-//  KeyCodeEnum.swift
+//  KeyCode.swift
 //  mpx
 //
 //  Created by Jiening Wen on 05/09/15.
