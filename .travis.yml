@@ -4,7 +4,7 @@ xcode_workspace: mpx.xcworkspace
 xcode_scheme: mpx
 before_install:
 - brew update || brew update
-- brew upgrade
+- brew outdated xctool || brew upgrade xctool
 install:
 - $TRAVIS_BUILD_DIR/install_deps.sh
 - pod install --project-directory=$TRAVIS_BUILD_DIR

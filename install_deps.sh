@@ -1,32 +1,37 @@
 #!/usr/bin/env bash
 set -e
 
-MPV_TAG=v0.10.0
+MPV_VER=0.10.0
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
 
 cd $SCRIPT_DIR/..
-# checkout mpv
-[[ -d mpv ]] && rm -rf mpv
-git clone https://github.com/mpv-player/mpv.git mpv
-git -C ./mpv checkout tags/$MPV_TAG
+# download mpv tarball
+[[ -f v$MPV_VER.tar.gz ]] && rm -f v$MPV_VER.tar.gz
+wget https://github.com/mpv-player/mpv/archive/v$MPV_VER.tar.gz
+[[ -d mpv-$MPV_VER ]] && rm -rf mpv-$MPV_VER
+tar zxf v$MPV_VER.tar.gz
 
 # (re)install mpv deps
-brew install --HEAD ffmpeg
-brew install libass \
+brew install --HEAD ffmpeg --without-fontconfig --without-libass
+brew tap mpv-player/mpv
+brew install --HEAD mpv-player/mpv/libass-git
+brew install lcms2 \
 			libbluray \
 			libdvdread \
 			libdvdnav \
 			enca \
-			uchardet
+			uchardet \
+			libjpeg \
+			fontconfig
 
-cd mpv
+cd mpv-$MPV_VER
 # compile libmpv
+export PKG_CONFIG_PATH=/usr/local/opt/libass-git/lib/pkgconfig:/usr/local/lib/pkgconfig:/usr/local/lib
 python bootstrap.py
 ./waf configure --disable-cplayer \
 				--enable-libmpv-shared \
 				--enable-static-build \
-				--disable-lua \
-				--disable-jpeg
+				--disable-lua
 ./waf clean build
 
 # copy libmpv.dylib
