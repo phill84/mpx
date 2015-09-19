@@ -13,8 +13,8 @@ class PlayerWindow: NSWindow {
 
     let logger = XCGLogger.defaultInstance()
     
-    override init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, defer flag: Bool) {
-        super.init(contentRect: contentRect, styleMask: aStyle, backing: bufferingType, defer: flag)
+    override init(contentRect: NSRect, styleMask aStyle: Int, backing bufferingType: NSBackingStoreType, `defer` flag: Bool) {
+        super.init(contentRect: contentRect, styleMask: aStyle, backing: bufferingType, `defer`: flag)
         self.backgroundColor = NSColor.blackColor()
     }
 

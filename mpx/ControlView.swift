@@ -17,7 +17,7 @@ class ControlView: NSView {
     override func drawRect(dirtyRect: NSRect) {
         self.superview!.layer!.cornerRadius = 5
         self.superview!.layer!.masksToBounds = true
-        self.superview!.layer!.edgeAntialiasingMask = CAEdgeAntialiasingMask.LayerBottomEdge | CAEdgeAntialiasingMask.LayerLeftEdge | CAEdgeAntialiasingMask.LayerRightEdge | CAEdgeAntialiasingMask.LayerTopEdge
+        self.superview!.layer!.edgeAntialiasingMask = [CAEdgeAntialiasingMask.LayerBottomEdge, CAEdgeAntialiasingMask.LayerLeftEdge, CAEdgeAntialiasingMask.LayerRightEdge, CAEdgeAntialiasingMask.LayerTopEdge]
         
         super.drawRect(dirtyRect)
     }

@@ -37,8 +37,6 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     }
 	
 	override func keyDown(event: NSEvent) {
-		let keyCode = event.keyCode
-		
 		switch event.keyCode {
 		case KeyCode.kVK_Space.UInt16Value():
 			mpv!.togglePause()
@@ -72,7 +70,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         })
     }
     
-    func resize(#width: CGFloat, height: CGFloat) {
+    func resize(width width: CGFloat, height: CGFloat) {
         let screenFrame = NSScreen.mainScreen()!.visibleFrame
         
         let size = NSSize(width: width, height: height)
@@ -81,9 +79,9 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         // while preserving the aspect ratio
         var h = size.height
         var w = size.width
-        var ar = w / h
+        let ar = w / h
         
-        var maxHeight = screenFrame.height
+        let maxHeight = screenFrame.height
         
         if (h > maxHeight) {
             h = maxHeight
@@ -132,7 +130,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         }
     }
     
-    func customWindowsToEnterFullScreenForWindow(window: NSWindow) -> [AnyObject]? {
+    func customWindowsToEnterFullScreenForWindow(window: NSWindow) -> [NSWindow]? {
         return [window]
     }
     
@@ -146,7 +144,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         
         // custom fullscreen animation
         // center than resize
-        NSAnimationContext.runAnimationGroup({ (context: NSAnimationContext!) -> Void in
+        NSAnimationContext.runAnimationGroup({ (context: NSAnimationContext) -> Void in
             context.duration = duration
             window.animator().setFrame(frame, display: true)
         }, completionHandler: { () -> Void in
@@ -159,7 +157,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         }
     }
     
-    func customWindowsToExitFullScreenForWindow(window: NSWindow) -> [AnyObject]? {
+    func customWindowsToExitFullScreenForWindow(window: NSWindow) -> [NSWindow]? {
         return [window]
     }
     

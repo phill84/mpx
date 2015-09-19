@@ -23,7 +23,7 @@ class MpvController: NSObject {
 	var playlist = 0
 	
 	override init() {
-        playerWindowController = NSApplication.sharedApplication().windows[0].windowController() as! PlayerWindowController
+        playerWindowController = NSApplication.sharedApplication().windows[0].windowController as! PlayerWindowController
 		super.init()
         playerWindowController.mpv = self
         
@@ -46,7 +46,7 @@ class MpvController: NSObject {
 		mpvQueue = dispatch_queue_create("mpv", DISPATCH_QUEUE_SERIAL)
 		
         // set default options
-        var videoView: AnyObject? = playerWindowController.window?.contentView.subviews[0]
+        var videoView: AnyObject? = playerWindowController.window?.contentView!.subviews[0]
 		checkError(mpv_set_option(context!, "wid", MPV_FORMAT_INT64, &videoView), message: "mpv_set_option: wid")
 		checkError(mpv_set_option_string(context!, "audio-client-name", "mpx"), message: "mpv_set_option_string: audio-client-name")
         checkError(mpv_set_option_string(context!, "hwdec", "auto"), message: "mpv_set_option_string: hwdec")
@@ -54,18 +54,12 @@ class MpvController: NSObject {
 
         
 		// register callbacks
-		mpv_set_wakeup_callback(context!, getWakeupCallback(), unsafeBitCast(self, UnsafeMutablePointer<Void>.self));
-        state = .Initialized
-	}
-	
-	func getWakeupCallback() -> CFunctionPointer<(UnsafeMutablePointer<Void> -> Void)> {
-		let block : @objc_block (UnsafeMutablePointer<Void>) -> Void = { (context) in
+		func callback(context: UnsafeMutablePointer<Void>) -> Void {
 			let mpvController = unsafeBitCast(context, MpvController.self)
 			mpvController.readEvents()
 		}
-		let imp : COpaquePointer = imp_implementationWithBlock(unsafeBitCast(block, AnyObject.self))
-		let callback = CFunctionPointer<(UnsafeMutablePointer<Void> -> Void)>(imp)
-		return callback
+		mpv_set_wakeup_callback(context!, callback,	unsafeBitCast(self, UnsafeMutablePointer<Void>.self));
+        state = .Initialized
 	}
 	
 	func checkError(status: Int32, message: String) {
@@ -81,8 +75,8 @@ class MpvController: NSObject {
 			while (self.context != nil) {
 				let event = mpv_wait_event(self.context!, 0).memory
 
-				let event_id = event.event_id.value
-				if (event_id == MPV_EVENT_NONE.value) {
+				let event_id = event.event_id.rawValue
+				if (event_id == MPV_EVENT_NONE.rawValue) {
 					break
 				}
 				self.handleEvent(event)
@@ -91,14 +85,14 @@ class MpvController: NSObject {
 	}
 	
 	func handleEvent(event: mpv_event) {
-		switch event.event_id.value {
-        case MPV_EVENT_IDLE.value:
+		switch event.event_id.rawValue {
+        case MPV_EVENT_IDLE.rawValue:
             state = .Idle
             
-		case MPV_EVENT_SHUTDOWN.value:
+		case MPV_EVENT_SHUTDOWN.rawValue:
 			logger.debug("mpv shutdown")
 			
-		case MPV_EVENT_LOG_MESSAGE.value:
+		case MPV_EVENT_LOG_MESSAGE.rawValue:
 			let msg = UnsafeMutablePointer<mpv_event_log_message>(event.data).memory
 			let prefix = String.fromCString(msg.prefix)!
 			let level = String.fromCString(msg.level)!
@@ -108,15 +102,15 @@ class MpvController: NSObject {
                 NSLog("[\(prefix)] \(level): \(text)")
             }
 			
-		case MPV_EVENT_FILE_LOADED.value:
+		case MPV_EVENT_FILE_LOADED.rawValue:
 			logger.debug("file loaded")
             state = .FileLoaded
             
             // get video size and resize if necessary
-			videoOriginalSize = getVideoSize()
+            videoOriginalSize = getVideoSize()
             if AppDelegate.getInstance().fullscreen {
                 let mainFrame = NSScreen.mainScreen()!.frame
-                NSSize(width: mainFrame.width, height: mainFrame.height)
+                playerWindowController.resize(width: mainFrame.width, height: mainFrame.height)
             } else {
                 playerWindowController.resize(width: videoOriginalSize!.width, height: videoOriginalSize!.height)
             }
@@ -128,23 +122,23 @@ class MpvController: NSObject {
                 playerWindowController.updateTitle(title)
             }
 
-        case MPV_EVENT_PLAYBACK_RESTART.value:
+        case MPV_EVENT_PLAYBACK_RESTART.rawValue:
 			state = isPaused() ? .Paused : .Playing
             logger.debug("playback restarted")
 
-		case MPV_EVENT_PAUSE.value:
+		case MPV_EVENT_PAUSE.rawValue:
 			state = .Paused
 			logger.debug("playback paused")
 		
-		case MPV_EVENT_UNPAUSE.value:
+		case MPV_EVENT_UNPAUSE.rawValue:
 			state = .Playing
 			logger.debug("playback unpaused")
 		
-		case MPV_EVENT_END_FILE.value:
+		case MPV_EVENT_END_FILE.rawValue:
 			playlist--
 			let data = UnsafeMutablePointer<mpv_event_end_file>(event.data).memory
 			switch UInt32(data.reason) {
-			case MPV_END_FILE_REASON_ERROR.value:
+			case MPV_END_FILE_REASON_ERROR.rawValue:
 				let error = String.fromCString(mpv_error_string(data.error))!
 				logger.error("end file: \(error)")
 			default:

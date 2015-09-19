@@ -26,7 +26,7 @@ class PlayerViewController: NSViewController {
 		controlUIView = view.subviews[1] as? ControlUIView
 		resetIdleTimer()
 		
-		mpv = (view.window?.windowController() as! PlayerWindowController).mpv
+		mpv = (view.window?.windowController as! PlayerWindowController).mpv
 	}
 	
 	override func mouseEntered(event: NSEvent) {

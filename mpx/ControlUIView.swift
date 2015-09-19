@@ -31,18 +31,15 @@ class ControlUIView: NSView {
     
     override func updateTrackingAreas() {
         for area in self.trackingAreas {
-            if area is NSTrackingArea {
-                removeTrackingArea(area as! NSTrackingArea)
-            }
+			removeTrackingArea(area)
         }
-        let area = NSTrackingArea(rect: self.bounds, options: NSTrackingAreaOptions.MouseEnteredAndExited |
-            NSTrackingAreaOptions.MouseMoved | NSTrackingAreaOptions.ActiveAlways, owner: self, userInfo: nil)
+        let area = NSTrackingArea(rect: self.bounds, options: [NSTrackingAreaOptions.MouseEnteredAndExited, NSTrackingAreaOptions.MouseMoved, NSTrackingAreaOptions.ActiveAlways], owner: self, userInfo: nil)
         addTrackingArea(area)
         
         super.updateTrackingAreas()
     }
     
     override func mouseDown(event: NSEvent) {
-        self.window?.windowController()?.mouseDown(event)
+        self.window?.windowController?.mouseDown(event)
     }
 }

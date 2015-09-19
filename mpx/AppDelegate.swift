@@ -28,9 +28,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	func applicationDidFinishLaunching(notification: NSNotification) {
 		// set up default logger
 		#if DEBUG
-			logger.setup(logLevel: .Debug, showThreadName: true, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil)
+			logger.setup(.Debug, showThreadName: true, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil)
 		#else
-			logger.setup(logLevel: .Severe, showThreadName: true, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil)
+			logger.setup(.Severe, showThreadName: true, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil)
 		#endif
 		
         // change appearance to vibrant dark
@@ -38,7 +38,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         playerWindow.appearance = NSAppearance(named: NSAppearanceNameVibrantDark)
         playerWindow.orderOut(self)
         
-        playerWindowController = playerWindow.windowController() as? PlayerWindowController
+        playerWindowController = playerWindow.windowController as? PlayerWindowController
         
 		// Initialize controllers
 		mpv = MpvController()
@@ -57,7 +57,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 	
 	@IBAction func openMediaFile(sender: AnyObject) {
-		var openPanel = NSOpenPanel()
+		let openPanel = NSOpenPanel()
 		
 		openPanel.canChooseFiles = true
 		openPanel.canChooseDirectories = false
@@ -69,7 +69,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		
 		if (openPanel.runModal() == NSFileHandlingPanelOKButton) {
 			self.logger.debug(openPanel.URLs.debugDescription)
-			self.mpv?.openMediaFiles(openPanel.URLs.first! as! NSURL)
+			self.mpv?.openMediaFiles(openPanel.URLs.first! )
 		}
 	}
 
