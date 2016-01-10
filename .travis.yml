@@ -6,5 +6,5 @@ before_install:
 - brew update || brew update
 - brew outdated xctool || brew upgrade xctool
 install:
-- $TRAVIS_BUILD_DIR/install_deps.sh
+- travis_wait $TRAVIS_BUILD_DIR/install_deps.sh
 - pod install --project-directory=$TRAVIS_BUILD_DIR

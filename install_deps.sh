@@ -14,6 +14,7 @@ tar zxf v$MPV_VER.tar.gz
 # (re)install mpv deps
 brew install --HEAD ffmpeg --without-fontconfig --without-libass
 brew install lcms2 \
+			libass \
 			libbluray \
 			libdvdread \
 			libdvdnav \
