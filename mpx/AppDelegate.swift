@@ -78,13 +78,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		openPanel.canChooseDirectories = false
 		openPanel.resolvesAliases = false
 		openPanel.canCreateDirectories = false
-		openPanel.allowsMultipleSelection = false
+		openPanel.allowsMultipleSelection = true
 		
 		openPanel.title = "Open Media File"
 		
 		if (openPanel.runModal() == NSFileHandlingPanelOKButton) {
 			self.logger.debug(openPanel.URLs.debugDescription)
-			self.mpv?.openMediaFiles(openPanel.URLs.first! )
+			self.mpv?.openMediaFiles(openPanel.URLs)
 		}
 	}
 

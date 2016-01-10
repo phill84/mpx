@@ -75,7 +75,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     
 	func hideWindow() {
         dispatch_async(dispatch_get_main_queue(), {
-            window?.orderOut(self)
+            self.window?.orderOut(self)
         })
     }
     
@@ -85,8 +85,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         })
     }
     
-    func resize(width width: CGFloat, height: CGFloat) {
-        let screenFrame = NSScreen.mainScreen()!.visibleFrame
+	func resize(videoWidth width: CGFloat, videoHeight height: CGFloat, inRect frame: NSRect) {
         
         let size = NSSize(width: width, height: height)
         
@@ -96,14 +95,14 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         var w = size.width
         let ar = w / h
         
-        let maxHeight = screenFrame.height
+        let maxHeight = frame.height
         
         if (h > maxHeight) {
             h = maxHeight
             w = h * ar
         }
-        if (w > screenFrame.width) {
-            w = screenFrame.width
+        if (w > frame.width) {
+            w = frame.width
             h = w / ar
         }
         
@@ -113,8 +112,8 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
             return
         }
         
-        let xOffset = (screenFrame.width - w) / 2
-        let yOffset = (screenFrame.height - h) / 2 + screenFrame.origin.y
+        let xOffset = (frame.width - w) / 2
+        let yOffset = (frame.height - h) / 2 + frame.origin.y
         
         let frame = NSRect(x: xOffset, y: yOffset, width: w, height: h)
         
@@ -182,7 +181,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
             if previousFrame != nil {
                 window.setFrame(previousFrame!, display: true)
             } else if let originalSize = AppDelegate.getInstance().mpv!.videoOriginalSize {
-                resize(width: originalSize.width, height: originalSize.height)
+				resize(videoWidth: originalSize.width, videoHeight: originalSize.height, inRect: NSScreen.mainScreen()!.visibleFrame)
             } else {
                 window.setFrame(defaultFrame!, display: true)
             }
@@ -213,16 +212,16 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     
     func resizeHalf() {
         let originalSize = mpv!.videoOriginalSize!
-        resize(width: originalSize.width / 2, height: originalSize.height / 2)
+        resize(videoWidth: originalSize.width / 2, videoHeight: originalSize.height / 2, inRect: NSScreen.mainScreen()!.visibleFrame)
     }
     
     func resizeOriginal() {
         let originalSize = mpv!.videoOriginalSize!
-        resize(width: originalSize.width, height: originalSize.height)
+        resize(videoWidth: originalSize.width, videoHeight: originalSize.height, inRect: NSScreen.mainScreen()!.visibleFrame)
     }
     
     func resizeDouble() {
         let originalSize = mpv!.videoOriginalSize!
-        resize(width: originalSize.width * 2, height: originalSize.height * 2)
+        resize(videoWidth: originalSize.width * 2, videoHeight: originalSize.height * 2, inRect: NSScreen.mainScreen()!.visibleFrame)
     }
 }

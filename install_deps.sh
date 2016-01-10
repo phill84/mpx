@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-MPV_VER=0.10.0
+MPV_VER=0.14.0
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
 
 cd $SCRIPT_DIR/..
@@ -13,8 +13,6 @@ tar zxf v$MPV_VER.tar.gz
 
 # (re)install mpv deps
 brew install --HEAD ffmpeg --without-fontconfig --without-libass
-brew tap mpv-player/mpv
-brew install --HEAD mpv-player/mpv/libass-git
 brew install lcms2 \
 			libbluray \
 			libdvdread \

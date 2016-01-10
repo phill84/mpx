@@ -19,9 +19,10 @@
 		47C5CEB11B86781600BE6554 /* PlayerWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C5CEB01B86781600BE6554 /* PlayerWindow.swift */; };
 		47C5CEB31B87C54900BE6554 /* ControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C5CEB21B87C54900BE6554 /* ControlView.swift */; };
 		47C5CEB51B87D1F700BE6554 /* ControlUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C5CEB41B87D1F700BE6554 /* ControlUIView.swift */; };
+		47DCCDC21C4296DD00F275A9 /* libmpv.1.20.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 47DCCDC11C4296DD00F275A9 /* libmpv.1.20.0.dylib */; };
+		47DCCDC51C429D8200F275A9 /* PlayList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DCCDC41C429D8200F275A9 /* PlayList.swift */; };
 		47EAAC531B8BBE3400EC1461 /* PlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EAAC521B8BBE3400EC1461 /* PlayerState.swift */; };
-		47EAAC551B8D095100EC1461 /* mpxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EAAC541B8D095100EC1461 /* mpxTests.swift */; };
-		47EFA25B1B9C7743001AE5B4 /* libmpv.1.19.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 47EFA25A1B9C7743001AE5B4 /* libmpv.1.19.0.dylib */; };
+		47EAAC551B8D095100EC1461 /* PlayerWindowControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EAAC541B8D095100EC1461 /* PlayerWindowControllerTest.swift */; };
 		6F14AEF93B2728214C1926D0 /* Pods_mpx.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC91C244E08987EE3FEE9C96 /* Pods_mpx.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -54,9 +55,10 @@
 		47C5CEB01B86781600BE6554 /* PlayerWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerWindow.swift; path = mpx/PlayerWindow.swift; sourceTree = "<group>"; };
 		47C5CEB21B87C54900BE6554 /* ControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ControlView.swift; path = mpx/ControlView.swift; sourceTree = "<group>"; };
 		47C5CEB41B87D1F700BE6554 /* ControlUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ControlUIView.swift; path = mpx/ControlUIView.swift; sourceTree = "<group>"; };
+		47DCCDC11C4296DD00F275A9 /* libmpv.1.20.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmpv.1.20.0.dylib; sourceTree = "<group>"; };
+		47DCCDC41C429D8200F275A9 /* PlayList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayList.swift; sourceTree = "<group>"; };
 		47EAAC521B8BBE3400EC1461 /* PlayerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerState.swift; sourceTree = "<group>"; };
-		47EAAC541B8D095100EC1461 /* mpxTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mpxTests.swift; sourceTree = "<group>"; };
-		47EFA25A1B9C7743001AE5B4 /* libmpv.1.19.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmpv.1.19.0.dylib; sourceTree = "<group>"; };
+		47EAAC541B8D095100EC1461 /* PlayerWindowControllerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerWindowControllerTest.swift; sourceTree = "<group>"; };
 		937C74BFC03A022A479B49F1 /* Pods-mpx.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mpx.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mpx/Pods-mpx.debug.xcconfig"; sourceTree = "<group>"; };
 		CC91C244E08987EE3FEE9C96 /* Pods_mpx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mpx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECAF707CAD6A950CA12731C5 /* Pods-mpx.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mpx.release.xcconfig"; path = "Pods/Target Support Files/Pods-mpx/Pods-mpx.release.xcconfig"; sourceTree = "<group>"; };
@@ -67,7 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				47EFA25B1B9C7743001AE5B4 /* libmpv.1.19.0.dylib in Frameworks */,
+				47DCCDC21C4296DD00F275A9 /* libmpv.1.20.0.dylib in Frameworks */,
 				6F14AEF93B2728214C1926D0 /* Pods_mpx.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -118,8 +120,9 @@
 		47AD85611B6CF6F700B5A3C1 /* mpx */ = {
 			isa = PBXGroup;
 			children = (
-				47AD85C91B6E0A3300B5A3C1 /* controller */,
+				47DCCDC31C429ACC00F275A9 /* model */,
 				47AD85C41B6E08F800B5A3C1 /* view */,
+				47AD85C91B6E0A3300B5A3C1 /* controller */,
 				47AD85641B6CF6F700B5A3C1 /* AppDelegate.swift */,
 				4741D9931B9B3F38001A1D6F /* KeyCode.swift */,
 				47EAAC521B8BBE3400EC1461 /* PlayerState.swift */,
@@ -142,7 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				47AD85751B6CF6F700B5A3C1 /* Supporting Files */,
-				47EAAC541B8D095100EC1461 /* mpxTests.swift */,
+				47EAAC541B8D095100EC1461 /* PlayerWindowControllerTest.swift */,
 			);
 			path = mpxTests;
 			sourceTree = "<group>";
@@ -180,7 +183,7 @@
 		47AD85DF1B77AC8D00B5A3C1 /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				47EFA25A1B9C7743001AE5B4 /* libmpv.1.19.0.dylib */,
+				47DCCDC11C4296DD00F275A9 /* libmpv.1.20.0.dylib */,
 			);
 			path = lib;
 			sourceTree = "<group>";
@@ -207,6 +210,14 @@
 			children = (
 			);
 			path = fonts;
+			sourceTree = "<group>";
+		};
+		47DCCDC31C429ACC00F275A9 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				47DCCDC41C429D8200F275A9 /* PlayList.swift */,
+			);
+			name = model;
 			sourceTree = "<group>";
 		};
 		E85519FBD8E72CCA72A56A3C /* Frameworks */ = {
@@ -388,6 +399,7 @@
 				4741D9921B99CD43001A1D6F /* PlayerViewController.swift in Sources */,
 				47C5CEB51B87D1F700BE6554 /* ControlUIView.swift in Sources */,
 				47EAAC531B8BBE3400EC1461 /* PlayerState.swift in Sources */,
+				47DCCDC51C429D8200F275A9 /* PlayList.swift in Sources */,
 				47C5CEB31B87C54900BE6554 /* ControlView.swift in Sources */,
 				470A521C1B7A7F0900200D17 /* VideoView.swift in Sources */,
 				47C5CEB11B86781600BE6554 /* PlayerWindow.swift in Sources */,
@@ -403,7 +415,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				47EAAC551B8D095100EC1461 /* mpxTests.swift in Sources */,
+				47EAAC551B8D095100EC1461 /* PlayerWindowControllerTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

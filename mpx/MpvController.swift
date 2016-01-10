@@ -29,13 +29,13 @@ class MpvController: NSObject {
 	
 	let logger = XCGLogger.defaultInstance()
     let playerWindowController: PlayerWindowController
+	let playlist = PlayList()
 	
 	var context: COpaquePointer?
 	var mpvQueue: dispatch_queue_t?
     var videoOriginalSize: NSSize?
     
     var state: PlayerState = .Uninitialized
-	var playlist = 0
 	
 	override init() {
         playerWindowController = NSApplication.sharedApplication().windows[0].windowController as! PlayerWindowController
@@ -125,9 +125,9 @@ class MpvController: NSObject {
             videoOriginalSize = getVideoSize()
             if AppDelegate.getInstance().fullscreen {
                 let mainFrame = NSScreen.mainScreen()!.frame
-                playerWindowController.resize(width: mainFrame.width, height: mainFrame.height)
+				playerWindowController.resize(videoWidth: mainFrame.width, videoHeight: mainFrame.height, inRect: NSScreen.mainScreen()!.visibleFrame)
             } else {
-                playerWindowController.resize(width: videoOriginalSize!.width, height: videoOriginalSize!.height)
+                playerWindowController.resize(videoWidth: videoOriginalSize!.width, videoHeight: videoOriginalSize!.height, inRect: NSScreen.mainScreen()!.visibleFrame)
             }
             playerWindowController.showWindow()
             AppDelegate.getInstance().mediaFileLoaded = true
@@ -150,7 +150,6 @@ class MpvController: NSObject {
 			logger.debug("playback unpaused")
 		
 		case MPV_EVENT_END_FILE.rawValue:
-			playlist--
 			let data = UnsafeMutablePointer<mpv_event_end_file>(event.data).memory
 			switch UInt32(data.reason) {
 			case MPV_END_FILE_REASON_ERROR.rawValue:
@@ -159,8 +158,12 @@ class MpvController: NSObject {
 			default:
 				logger.debug("end file: \(data.reason)")
 			}
-			if playlist == 0 {
+			if playlist.isEmpty() || playlist.isCurrentFileTheLast() {
 				NSApplication.sharedApplication().stop(self)
+			} else {
+				// play next in playlist
+				let nextFile = playlist.getNextFileForPlaying()
+				openMediaFile(nextFile)
 			}
 			
 		default:
@@ -194,7 +197,12 @@ class MpvController: NSObject {
         }
     }
     
-	func openMediaFiles(url: NSURL) {
+	func openMediaFiles(urls: [NSURL]) {
+		playlist.replacePlayList(urls)
+		openMediaFile(urls.first!)
+	}
+	
+	func openMediaFile(url: NSURL) {
 		dispatch_async(mpvQueue!, {
 			self.logger.debug("attempt to open \(url.debugDescription)")
 			var cmd = [
@@ -202,7 +210,6 @@ class MpvController: NSObject {
 				(url.path! as NSString).UTF8String,
 				nil
 			]
-			self.playlist++
 			mpv_command(self.context!, &cmd)
 		})
 	}

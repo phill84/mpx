@@ -1,5 +1,5 @@
 //
-//  mpxTests.swift
+//  PlayerWindowControllerTest.swift
 //  mpx
 //
 //  Created by Jiening Wen on 25/08/15.
@@ -23,11 +23,14 @@
 
 import Cocoa
 import XCTest
+@testable import mpx
 
-class mpxTests: XCTestCase {
+class PlayerWindowControllerTest: XCTestCase {
+	
+	var playerWindowController: PlayerWindowController?
+	
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
     override func tearDown() {
@@ -35,9 +38,9 @@ class mpxTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
+    func testMockInitializer() {
         // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
+		XCTAssertNil(playerWindowController)
     }
     
     func testPerformanceExample() {
