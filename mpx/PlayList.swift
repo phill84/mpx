@@ -46,4 +46,9 @@ class PlayList: NSObject {
 		currentFileIndex += 1
 		return urls[currentFileIndex]
 	}
+	
+	func getCurrentFileName() -> String {
+		let currentFile = urls[currentFileIndex]
+		return currentFile.lastPathComponent!
+	}
 }

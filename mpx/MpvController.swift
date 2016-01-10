@@ -66,7 +66,6 @@ class MpvController: NSObject {
 		checkError(mpv_set_option_string(context!, "audio-client-name", "mpx"), message: "mpv_set_option_string: audio-client-name")
         checkError(mpv_set_option_string(context!, "hwdec", "auto"), message: "mpv_set_option_string: hwdec")
         checkError(mpv_set_option_string(context!, "hwdec-codecs", "all"), message: "mpv_set_option_string: hwdec-codecs")
-
         
 		// register callbacks
 		func callback(context: UnsafeMutablePointer<Void>) -> Void {
@@ -74,6 +73,10 @@ class MpvController: NSObject {
 			mpvController.readEvents()
 		}
 		mpv_set_wakeup_callback(context!, callback,	unsafeBitCast(self, UnsafeMutablePointer<Void>.self));
+		
+		// observe properties for UI update
+		mpv_observe_property(context!, 0, "pause", MPV_FORMAT_FLAG)
+		
         state = .Initialized
 	}
 	
@@ -136,9 +139,13 @@ class MpvController: NSObject {
             if let title = getVideoTitle() {
                 playerWindowController.updateTitle(title)
             }
+			
+			displayTextOSD(playlist.getCurrentFileName())
 
         case MPV_EVENT_PLAYBACK_RESTART.rawValue:
-			state = isPaused() ? .Paused : .Playing
+			if state != .Paused {
+				state = .Playing
+			}
             logger.debug("playback restarted")
 
 		case MPV_EVENT_PAUSE.rawValue:
@@ -146,7 +153,6 @@ class MpvController: NSObject {
 			logger.debug("playback paused")
 		
 		case MPV_EVENT_UNPAUSE.rawValue:
-			state = .Playing
 			logger.debug("playback unpaused")
 		
 		case MPV_EVENT_END_FILE.rawValue:
@@ -164,6 +170,21 @@ class MpvController: NSObject {
 				// play next in playlist
 				let nextFile = playlist.getNextFileForPlaying()
 				openMediaFile(nextFile)
+			}
+		case MPV_EVENT_PROPERTY_CHANGE.rawValue:
+			let data = UnsafeMutablePointer<mpv_event_property>(event.data).memory
+			let property_name = String.fromCString(data.name)!
+			switch property_name {
+			case "pause":
+				let flag = UnsafeMutablePointer<Int>(data.data).memory
+				if flag == 0 { // playing
+					state = .Playing
+					displayTextOSD("Play")
+				} else { // paused
+					displayTextOSD("Pause")
+				}
+			default:
+				break
 			}
 			
 		default:
@@ -214,16 +235,6 @@ class MpvController: NSObject {
 		})
 	}
 	
-	func isPaused() -> Bool {
-		var flag: Int?
-		mpv_get_property(context!, "pause", MPV_FORMAT_FLAG, &flag)
-		
-		if (flag == nil) {
-			return false
-		}
-		return flag == 1
-	}
-	
 	func togglePause() {
 		var pause = 1
 		
@@ -248,5 +259,14 @@ class MpvController: NSObject {
 		]
 		
 		mpv_cmd_node_async(context!, values, &mpv_formats)
+	}
+	
+	func displayTextOSD(text: String) {
+		var cmd = [
+			("show-text" as NSString).UTF8String,
+			(text as NSString).UTF8String,
+			nil
+		]
+		mpv_command(context!, &cmd)
 	}
 }
